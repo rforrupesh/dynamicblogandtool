@@ -1,0 +1,8 @@
+title: "FontCraft"
+description: "Generate fancy fonts & copy them instantly — free Unicode font generator"
+url: "https://yourusername.github.io"
+baseurl: ""
+lang: en
+author: "FontCraft"
+markdown: kramdown
+permalink: pretty
