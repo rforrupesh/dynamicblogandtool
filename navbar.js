@@ -223,3 +223,14 @@
     initNavbar();
   }
 })();
+
+// Load auth.js for legacy static pages (Jekyll pages get it via _includes/scripts.html)
+(function () {
+  if (document.getElementById('fg-auth-script')) return; // already loaded
+  var s = document.createElement('script');
+  s.id = 'fg-auth-script';
+  var src = document.querySelector('script[src*="navbar.js"]');
+  var base = src ? src.src.replace(/navbar\.js.*$/, '') : '/';
+  s.src = base + 'auth.js';
+  document.head.appendChild(s);
+})();

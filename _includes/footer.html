@@ -1,2 +1,85 @@
-<!-- _includes/footer.html -->
-<script src="{{ site.baseurl }}/footer.js"></script>
+<!-- _includes/footer.html — Static HTML footer for SEO indexability -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-container">
+
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="{{ site.baseurl }}/" class="footer-logo" title="FontGen Home">
+          <img src="{{ site.baseurl }}/img/logo_header.png" alt="FontGen — Free Font Generator" width="130" height="37" loading="lazy">
+        </a>
+        <p class="footer-tagline">190+ font styles. Free forever. No account needed.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Font Styles</h4>
+          <ul>
+            <li><a href="{{ site.baseurl }}/tools/cool.html">Cool Text Fonts</a></li>
+            <li><a href="{{ site.baseurl }}/tools/cursive.html">Cursive Maker</a></li>
+            <li><a href="{{ site.baseurl }}/tools/fancy.html">Fancy Letters</a></li>
+            <li><a href="{{ site.baseurl }}/tools/bold.html">Bold Generator</a></li>
+            <li><a href="{{ site.baseurl }}/tools/italic.html">Italics Generator</a></li>
+            <li><a href="{{ site.baseurl }}/tools/pretty-fonts.html">Pretty Fonts</a></li>
+            <li><a href="{{ site.baseurl }}/tools/small.html">Tiny Text Generator</a></li>
+            <li><a href="{{ site.baseurl }}/tools/calligraphy.html">Calligraphy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Special Effects</h4>
+          <ul>
+            <li><a href="{{ site.baseurl }}/tools/glitch.html">Glitchy Text</a></li>
+            <li><a href="{{ site.baseurl }}/tools/strikethrough.html">Crossed Out Text</a></li>
+            <li><a href="{{ site.baseurl }}/tools/upside-down.html">Upside-Down Text</a></li>
+            <li><a href="{{ site.baseurl }}/tools/weird-text.html">Strange Text</a></li>
+            <li><a href="{{ site.baseurl }}/tools/vaporwave-text.html">Vaporwave Font</a></li>
+            <li><a href="{{ site.baseurl }}/tools/aesthetic.html">Aesthetic Font</a></li>
+            <li><a href="{{ site.baseurl }}/tools/demonic.html">Satanic Text</a></li>
+            <li><a href="{{ site.baseurl }}/tools/invisible.html">Blank Space</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>More Tools</h4>
+          <ul>
+            <li><a href="{{ site.baseurl }}/tools/symbols.html">Cool Symbols</a></li>
+            <li><a href="{{ site.baseurl }}/tools/underline-text.html">Underline Words</a></li>
+            <li><a href="{{ site.baseurl }}/tools/stylish-text-generator.html">Style Fonts</a></li>
+            <li><a href="{{ site.baseurl }}/tools/japanese-text.html">Japanese Symbols</a></li>
+            <li><a href="{{ site.baseurl }}/tools/special.html">Special Font Style</a></li>
+            <li><a href="{{ site.baseurl }}/image-color-picker.html">Color Picker</a></li>
+            <li><a href="{{ site.baseurl }}/character-counter.html">Character Counter</a></li>
+            <li><a href="{{ site.baseurl }}/notepad.html">Online Notepad</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="{{ site.baseurl }}/blog.html">Blog</a></li>
+            <li><a href="{{ site.baseurl }}/different-fonts/">All Alphabet Fonts</a></li>
+            <li><a href="{{ site.baseurl }}/about-us.html">About Us</a></li>
+            <li><a href="{{ site.baseurl }}/contact-us.html">Contact</a></li>
+            <li><a href="{{ site.baseurl }}/privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="{{ site.baseurl }}/feedback.html">Feedback</a></li>
+            <li><a href="{{ site.baseurl }}/changelog.html">Latest Updates</a></li>
+            <li><a href="{{ site.baseurl }}/faq.html">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-left">
+        &copy; {% assign current_year = 'now' | date: '%Y' %}{{ current_year }} FontGen.in &mdash; All rights reserved.
+      </div>
+      <div class="footer-right">
+        <a href="{{ site.baseurl }}/privacy-policy.html">Privacy Policy</a>
+        <a href="{{ site.baseurl }}/about-us.html">About Us</a>
+        <a href="{{ site.baseurl }}/contact-us.html">Contact</a>
+        <a href="{{ site.baseurl }}/changelog.html">Latest Updates</a>
+        <a href="{{ site.baseurl }}/feedback.html">Feedback</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<button id="backToTopBtn" title="Back to top" aria-label="Back to top">&#8679;</button>
