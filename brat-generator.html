@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>brat generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #ebebeb;
+    --panel: #e2e2e2;
+    --card: #f8f8f8;
+    --border: #d0d0d0;
+    --text: #111;
+    --muted: #999;
+    --accent: #8ace00;
+    --header: 48px;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: 'Unbounded', system-ui, sans-serif;
+    color: var(--text);
+  }
+
+  /* ── HEADER ── */
+  header {
+    height: var(--header);
+    background: rgba(235,235,235,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 18px; flex-shrink: 0;
+  }
+  .logo { font-size: 12px; font-weight: 900; letter-spacing: 0.08em; text-transform: lowercase; }
+  .logo span { color: var(--accent); }
+  .header-hint { font-size: 9px; color: var(--muted); letter-spacing: 0.1em; font-weight: 700; text-transform: lowercase; }
+
+  /* ── APP SHELL ── */
+  .app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+  /* ── TWO-COL BODY ── */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 290px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* ── LEFT: CANVAS ── */
+  .canvas-pane {
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .canvas-wrap {
+    position: relative;
+    /* largest square that fits the available pane */
+    width:  min(calc(100% - 0px), calc(100vh - var(--header) - 28px));
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.14);
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+    flex-shrink: 0;
+  }
+  .canvas-wrap:hover { transform: scale(1.012); box-shadow: 0 12px 48px rgba(0,0,0,0.2); }
+  #mainCanvas { width: 100%; height: 100%; display: block; }
+
+  .save-hint {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.52); color: #fff;
+    font-family: 'Unbounded', sans-serif; font-size: 9px;
+    letter-spacing: 0.14em; font-weight: 700;
+    padding: 5px 14px; border-radius: 20px;
+    opacity: 0; transition: opacity 0.18s; pointer-events: none; white-space: nowrap;
+  }
+  .canvas-wrap:hover .save-hint { opacity: 1; }
+
+  /* ── RIGHT: CONTROLS  (no overflow — everything visible) ── */
+  .controls-pane {
+    border-left: 1px solid var(--border);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    padding: 12px 13px;
+    gap: 10px;
+    overflow: hidden; /* hard no-scroll */
+  }
+
+  .ctrl-label {
+    font-size: 8px; font-weight: 900; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+
+  /* divider */
+  .div { height: 1px; background: var(--border); flex-shrink: 0; }
+
+  /* COLOUR */
+  .color-dots { display: flex; gap: 7px; flex-wrap: wrap; }
+  .dot {
+    width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+    border: 3px solid transparent; transition: transform 0.12s, border-color 0.12s;
+    position: relative; flex-shrink: 0;
+  }
+  .dot:hover { transform: scale(1.13); }
+  .dot.active { border-color: #333 !important; }
+  .dot-lime   { background: #8ace00; border-color: #aaa !important; }
+  .dot-tex    { background: #8ace00; overflow: hidden; }
+  .dot-tex::after {
+    content:''; position:absolute; inset:0; border-radius:50%;
+    background: repeating-linear-gradient(45deg,#000 0,#000 2px,transparent 2px,transparent 7px);
+    opacity: 0.4;
+  }
+  .dot-black  { background: #111; }
+  .dot-white  { background: #fff; border-color: #ccc !important; }
+  .dot-blue   { background: #2244dd; }
+  .dot-red    { background: #cc1111; }
+  .dot-pink   { background: #ff69b4; }
+  .dot-purple { background: #7b2fff; }
+
+  /* STYLE */
+  .pill-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+  }
+  .pill {
+    padding: 7px 4px; border-radius: 7px;
+    border: 2px solid var(--border); background: var(--card);
+    font-size: 8.5px; font-weight: 900; font-family: 'Unbounded', sans-serif;
+    cursor: pointer; text-transform: lowercase; color: var(--text);
+    transition: all 0.12s; text-align: center; letter-spacing: 0.02em;
+  }
+  .pill:hover { border-color: var(--accent); }
+  .pill.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+  /* TEXT PRESETS */
+  .tpill-list { display: flex; flex-direction: column; gap: 5px; }
+  .tpill {
+    padding: 7px 10px; border-radius: 7px;
+    border: 2px solid var(--border); background: var(--card);
+    font-size: 8.5px; font-weight: 700; font-family: 'Unbounded', sans-serif;
+    cursor: pointer; text-transform: lowercase; color: var(--muted);
+    transition: all 0.12s; text-align: left;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tpill:hover { border-color: var(--accent); color: var(--text); }
+  .tpill.active { background: var(--accent); color: var(--text); border-color: var(--accent); }
+
+  /* TEXTAREA — flex-grow fills remaining space */
+  .ta-wrap { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  textarea {
+    flex: 1; min-height: 0;
+    width: 100%; background: var(--card);
+    border: 2px solid var(--border); border-radius: 7px;
+    color: var(--text); font-size: 13px; font-weight: 700;
+    font-family: 'Unbounded', sans-serif;
+    padding: 9px 10px; outline: none; resize: none;
+    line-height: 1.45; transition: border-color 0.15s;
+  }
+  textarea:focus { border-color: var(--accent); }
+  textarea::placeholder { color: #bbb; }
+
+  /* SAVE */
+  .save-btn {
+    flex-shrink: 0;
+    width: 100%; background: var(--text); color: #fff;
+    border: none; border-radius: 8px;
+    padding: 12px; font-size: 9.5px; font-weight: 900;
+    font-family: 'Unbounded', sans-serif; cursor: pointer;
+    letter-spacing: 0.1em; text-transform: lowercase;
+    transition: background 0.12s, transform 0.1s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .save-btn:hover { background: #333; }
+  .save-btn:active { transform: scale(0.98); }
+
+  /* ════════════════════════════════
+     MOBILE ≤ 700px
+     Stack: canvas top (compact), controls below in compact grid
+  ════════════════════════════════ */
+  @media (max-width: 700px) {
+    .body {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      min-height: 0;
+    }
+
+    .canvas-pane {
+      padding: 9px 9px 6px;
+      flex-shrink: 0;
+    }
+
+    .canvas-wrap {
+      width: min(calc(100vw - 18px), 44vh);
+    }
+
+    .controls-pane {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding: 9px 11px;
+      gap: 7px;
+      flex: 1; min-height: 0;
+      overflow: hidden;
+    }
+
+    /* top row: colour + style side-by-side */
+    .mobile-top { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; flex-shrink: 0; }
+
+    .color-dots { gap: 5px; }
+    .dot { width: 24px; height: 24px; }
+
+    .pill-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+    .pill { font-size: 8px; padding: 6px 3px; }
+
+    /* presets horizontal scroll */
+    .tpill-list { flex-direction: row; overflow-x: auto; scrollbar-width: none; flex-shrink: 0; }
+    .tpill-list::-webkit-scrollbar { display: none; }
+    .tpill { flex-shrink: 0; max-width: 130px; font-size: 8px; padding: 5px 9px; }
+
+    .ctrl-label { font-size: 7.5px; margin-bottom: 4px; }
+
+    .ta-wrap textarea { font-size: 12px; padding: 7px 9px; }
+    .save-btn { padding: 10px; font-size: 9px; }
+  }
+
+  /* ── TABLET ── */
+  @media (min-width: 701px) and (max-width: 1024px) {
+    .body { grid-template-columns: 1fr 260px; }
+  }
+
+  #exportCanvas { display: none; }
+</style>
+</head>
+<body>
+<script src="/dynamicblogandtool/navbar.js"></script>
+<div class="app">
+
+  <header>
+    <div class="logo">brat<span>.</span>gen</div>
+    <div class="header-hint">tap canvas to save</div>
+  </header>
+
+  <div class="body">
+
+    <!-- CANVAS PANE -->
+    <div class="canvas-pane">
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="mainCanvas"></canvas>
+        <div class="save-hint">tap to save ↓</div>
+      </div>
+    </div>
+
+    <!-- CONTROLS PANE -->
+    <aside class="controls-pane">
+
+      <!-- COLOUR -->
+      <div class="section" id="colourSection">
+        <div class="ctrl-label">colour</div>
+        <div class="color-dots">
+          <div class="dot dot-lime active" data-bg="#8ace00" data-fg="#111111"></div>
+          <div class="dot dot-tex"         data-bg="#8ace00" data-fg="#111111" data-tex="1"></div>
+          <div class="dot dot-black"       data-bg="#111111" data-fg="#ffffff"></div>
+          <div class="dot dot-white"       data-bg="#ffffff" data-fg="#111111"></div>
+          <div class="dot dot-blue"        data-bg="#2244dd" data-fg="#ffffff"></div>
+          <div class="dot dot-red"         data-bg="#cc1111" data-fg="#ffffff"></div>
+          <div class="dot dot-pink"        data-bg="#ff69b4" data-fg="#111111"></div>
+          <div class="dot dot-purple"      data-bg="#7b2fff" data-fg="#ffffff"></div>
+        </div>
+      </div>
+
+      <div class="div"></div>
+
+      <!-- STYLE -->
+      <div class="section" id="styleSection">
+        <div class="ctrl-label">style</div>
+        <div class="pill-grid">
+          <button class="pill active" data-mode="blur">blur</button>
+          <button class="pill" data-mode="scribble">scribble</button>
+          <button class="pill" data-mode="mirror">mirror</button>
+          <button class="pill" data-mode="justify">justified</button>
+          <button class="pill" data-mode="clean">clean</button>
+        </div>
+      </div>
+
+      <div class="div"></div>
+
+      <!-- TEXT PRESETS -->
+      <div class="section" id="presetsSection">
+        <div class="ctrl-label">text presets</div>
+        <div class="tpill-list">
+          <button class="tpill active" data-text="brat">brat</button>
+          <button class="tpill" data-text="brat and it's completely different but also still brat">different but still brat</button>
+          <button class="tpill" data-text="brat and it's the same but there's three more songs so it's not">three more songs</button>
+          <button class="tpill" data-text="brat and it's completely different but also still brat and it's the same but there's three more songs so it's not">full phrase</button>
+        </div>
+      </div>
+
+      <div class="div"></div>
+
+      <!-- CUSTOM TEXT -->
+      <div class="ta-wrap">
+        <div class="ctrl-label">custom text</div>
+        <textarea id="textInput" placeholder="type something..." maxlength="240">brat</textarea>
+      </div>
+
+      <!-- SAVE -->
+      <button class="save-btn" id="saveBtn">save image ↓</button>
+
+    </aside>
+  </div>
+
+</div>
+
+<!-- MOBILE: rearrange colour + style into a side-by-side row -->
+<script>
+  function applyMobileLayout() {
+    const isMobile = window.innerWidth <= 700;
+    const aside = document.querySelector('.controls-pane');
+    const colourSec = document.getElementById('colourSection');
+    const styleSec  = document.getElementById('styleSection');
+
+    let mobileTop = document.querySelector('.mobile-top');
+
+    if (isMobile) {
+      if (!mobileTop) {
+        mobileTop = document.createElement('div');
+        mobileTop.className = 'mobile-top';
+        aside.insertBefore(mobileTop, aside.firstChild);
+        // move colour & style into it
+        mobileTop.appendChild(colourSec);
+        mobileTop.appendChild(styleSec);
+        // remove the divider that was between them (now first divider)
+        const firstDiv = aside.querySelector('.div');
+        if (firstDiv) firstDiv.remove();
+      }
+    } else {
+      // restore original order on desktop
+      if (mobileTop) {
+        aside.insertBefore(colourSec, aside.firstChild);
+        const divA = document.createElement('div'); divA.className = 'div';
+        aside.insertBefore(divA, styleSec);
+        aside.insertBefore(styleSec, divA.nextSibling);
+        const divB = document.createElement('div'); divB.className = 'div';
+        const presets = document.getElementById('presetsSection');
+        aside.insertBefore(divB, presets);
+        mobileTop.remove();
+      }
+    }
+  }
+</script>
+
+<canvas id="exportCanvas"></canvas>
+
+<script>
+let bgColor = '#8ace00', fgColor = '#111111', useTex = false, mode = 'blur', userText = 'brat';
+
+const mainCanvas = document.getElementById('mainCanvas');
+const exportCanvas = document.getElementById('exportCanvas');
+const mc = mainCanvas.getContext('2d');
+const ec = exportCanvas.getContext('2d');
+const wrap = document.getElementById('canvasWrap');
+const textarea = document.getElementById('textInput');
+
+function resizeCanvas() {
+  const s = wrap.clientWidth;
+  mainCanvas.width = mainCanvas.height = s;
+  render();
+}
+
+const ro = new ResizeObserver(() => resizeCanvas());
+ro.observe(wrap);
+
+function render() { draw(mc, mainCanvas.width, userText || 'brat', mode, bgColor, fgColor, useTex); }
+
+function draw(ctx, s, rawText, m, bg, fg, tex) {
+  ctx.clearRect(0, 0, s, s);
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, s, s);
+  if (tex) {
+    ctx.save();
+    const pat = document.createElement('canvas'); pat.width = pat.height = 10;
+    const pc = pat.getContext('2d');
+    pc.strokeStyle = fg === '#111111' ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.25)';
+    pc.lineWidth = 1.5; pc.beginPath(); pc.moveTo(0, 10); pc.lineTo(10, 0); pc.stroke();
+    ctx.fillStyle = ctx.createPattern(pat, 'repeat'); ctx.fillRect(0, 0, s, s);
+    ctx.restore();
+  }
+  const t = rawText.toLowerCase().trim() || 'brat';
+  if (m === 'blur')      drawBlur(ctx, s, t, fg);
+  else if (m === 'scribble') drawScribble(ctx, s, t, fg);
+  else if (m === 'mirror')   drawMirror(ctx, s, t, fg);
+  else if (m === 'justify')  drawJustify(ctx, s, t, fg);
+  else if (m === 'clean')    drawClean(ctx, s, t, fg);
+}
+
+function drawBlur(ctx,s,t,fg){
+  ctx.save();
+  const maxW=s*0.86,fs=bestFontSize(ctx,s,t,maxW,s*0.17,s*0.065);
+  ctx.font=`900 ${fs}px Arial,sans-serif`;ctx.fillStyle=fg;ctx.textAlign='center';ctx.textBaseline='middle';
+  const lines=wrapLines(ctx,t,maxW),lh=fs*1.1,totalH=lines.length*lh;
+  const sy=s/2-totalH/2+lh/2,blurR=s*0.005,steps=14;
+  ctx.globalAlpha=1/steps;
+  for(let i=0;i<steps;i++){const a=(i/steps)*Math.PI*2;lines.forEach((ln,li)=>ctx.fillText(ln,s/2+Math.cos(a)*blurR*3,sy+li*lh+Math.sin(a)*blurR*3));}
+  ctx.globalAlpha=1;ctx.restore();
+}
+function drawScribble(ctx,s,t,fg){
+  ctx.save();
+  const maxW=s*0.82,fs=bestFontSize(ctx,s,t,maxW,s*0.17,s*0.065);
+  ctx.font=`900 ${fs}px Arial,sans-serif`;ctx.fillStyle=fg;ctx.textAlign='center';ctx.textBaseline='middle';
+  const lines=wrapLines(ctx,t,maxW),lh=fs*1.1,totalH=lines.length*lh,sy=s/2-totalH/2+lh/2;
+  ctx.globalAlpha=0.13;
+  for(let i=0;i<8;i++){const a=(i/8)*Math.PI*2;lines.forEach((ln,li)=>ctx.fillText(ln,s/2+Math.cos(a)*s*0.003,sy+li*lh+Math.sin(a)*s*0.003));}
+  ctx.globalAlpha=1;lines.forEach((ln,li)=>ctx.fillText(ln,s/2,sy+li*lh));
+  const bx=(s-maxW)/2,by=s/2-totalH*0.55,bw=maxW,bh=totalH*1.1;
+  ctx.strokeStyle=fg;ctx.lineWidth=Math.max(1.5,s*0.003);ctx.lineCap='round';ctx.lineJoin='round';
+  const rng=seededRng(99),numLines=Math.round(18+lines.length*5);
+  for(let i=0;i<numLines;i++){
+    ctx.beginPath();
+    const yPos=by-bh*0.18+rng()*(bh*1.35),xS=bx-bw*0.15,xE=bx+bw+bw*0.15,wb=bh*0.06;
+    ctx.moveTo(xS,yPos+(rng()-.5)*wb);ctx.bezierCurveTo(bx+bw*.3,yPos+(rng()-.5)*wb,bx+bw*.7,yPos+(rng()-.5)*wb,xE,yPos+(rng()-.5)*wb);
+    ctx.globalAlpha=0.5+rng()*0.5;ctx.stroke();
+  }
+  for(let i=0;i<8;i++){
+    ctx.beginPath();const x0=bx+rng()*bw;
+    ctx.moveTo(x0,by-bh*.12);ctx.bezierCurveTo(x0+(rng()-.5)*s*.05,by+bh*.3,x0+(rng()-.5)*s*.05,by+bh*.7,x0+(rng()-.5)*s*.04,by+bh*1.12);
+    ctx.globalAlpha=0.35+rng()*.4;ctx.stroke();
+  }
+  ctx.globalAlpha=1;ctx.restore();
+}
+function drawMirror(ctx,s,t,fg){
+  ctx.save();ctx.translate(s,0);ctx.scale(-1,1);
+  const maxW=s*.88,fs=bestFontSize(ctx,s,t,maxW,s*.17,s*.065);
+  ctx.font=`900 ${fs}px Arial,sans-serif`;ctx.fillStyle=fg;ctx.textAlign='right';ctx.textBaseline='top';
+  const lines=wrapLines(ctx,t,maxW),lh=fs*1.05,totalH=lines.length*lh,sy=(s-totalH)/2,rx=s-s*.04;
+  ctx.globalAlpha=0.1;
+  for(let i=0;i<6;i++){const a=(i/6)*Math.PI*2;lines.forEach((ln,li)=>ctx.fillText(ln,rx+Math.cos(a)*s*.003,sy+li*lh+Math.sin(a)*s*.003));}
+  ctx.globalAlpha=1;lines.forEach((ln,li)=>ctx.fillText(ln,rx,sy+li*lh));ctx.restore();
+}
+function drawJustify(ctx,s,t,fg){
+  ctx.save();
+  const maxW=s*.90,pad=s*.05,fs=bestFontSize(ctx,s,t,maxW,s*.14,s*.055);
+  ctx.font=`900 ${fs}px Arial,sans-serif`;ctx.fillStyle=fg;ctx.textBaseline='top';
+  const words=t.split(/\s+/).filter(Boolean),lines=[];let cur=[];
+  for(const w of words){
+    const test=[...cur,w],tw=test.map(x=>ctx.measureText(x).width).reduce((a,b)=>a+b,0),spaces=(test.length-1)*fs*.28;
+    if(cur.length>0&&tw+spaces>maxW){lines.push(cur);cur=[w];}else cur=test;
+  }
+  if(cur.length)lines.push(cur);
+  const lh=fs*1.12,totalH=lines.length*lh;let y=(s-totalH)/2;
+  lines.forEach(lw=>{
+    if(lw.length<=1){ctx.textAlign='left';ctx.fillText(lw[0]||'',pad,y);}
+    else{const ww=lw.map(w=>ctx.measureText(w).width),gap=(maxW-ww.reduce((a,b)=>a+b,0))/(lw.length-1);let x=pad;
+    lw.forEach((w,wi)=>{ctx.textAlign='left';ctx.fillText(w,x,y);x+=ww[wi]+gap;});}
+    y+=lh;
+  });
+  ctx.restore();
+}
+function drawClean(ctx,s,t,fg){
+  ctx.save();
+  const maxW=s*.88,fs=bestFontSize(ctx,s,t,maxW,s*.18,s*.07);
+  ctx.font=`900 ${fs}px Arial,sans-serif`;ctx.fillStyle=fg;ctx.textAlign='center';ctx.textBaseline='middle';
+  const lines=wrapLines(ctx,t,maxW),lh=fs*1.1,totalH=lines.length*lh,sy=s/2-totalH/2+lh/2;
+  lines.forEach((ln,li)=>ctx.fillText(ln,s/2,sy+li*lh));ctx.restore();
+}
+function wrapLines(ctx,text,maxW){
+  const words=text.split(/\s+/),lines=[];let cur='';
+  for(const w of words){const test=cur?cur+' '+w:w;if(ctx.measureText(test).width>maxW&&cur){lines.push(cur);cur=w;}else cur=test;}
+  if(cur)lines.push(cur);return lines.length?lines:[text];
+}
+function bestFontSize(ctx,s,text,maxW,maxFs,minFs){
+  let lo=minFs,hi=maxFs,best=minFs;
+  for(let i=0;i<18;i++){
+    const mid=(lo+hi)/2;ctx.font=`900 ${mid}px Arial,sans-serif`;
+    const lines=wrapLines(ctx,text,maxW),mLW=Math.max(...lines.map(l=>ctx.measureText(l).width)),tH=lines.length*mid*1.15;
+    if(mLW<=maxW&&tH<=s*.93){best=mid;lo=mid;}else hi=mid;
+  }
+  return best;
+}
+function seededRng(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+
+document.querySelectorAll('.dot').forEach(d=>{
+  d.addEventListener('click',()=>{
+    document.querySelectorAll('.dot').forEach(x=>x.classList.remove('active'));
+    d.classList.add('active');bgColor=d.dataset.bg;fgColor=d.dataset.fg;useTex=!!d.dataset.tex;render();
+  });
+});
+document.querySelectorAll('.pill').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');mode=b.dataset.mode;render();
+  });
+});
+document.querySelectorAll('.tpill').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tpill').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');userText=b.dataset.text;textarea.value=userText;render();
+  });
+});
+textarea.addEventListener('input',e=>{
+  userText=e.target.value;
+  document.querySelectorAll('.tpill').forEach(b=>b.classList.remove('active'));
+  render();
+});
+
+function saveImage(){
+  const SIZE=1080;exportCanvas.width=exportCanvas.height=SIZE;
+  draw(ec,SIZE,userText||'brat',mode,bgColor,fgColor,useTex);
+  const a=document.createElement('a');a.download='brat.png';a.href=exportCanvas.toDataURL('image/png');a.click();
+}
+document.getElementById('saveBtn').addEventListener('click',saveImage);
+document.getElementById('canvasWrap').addEventListener('click',saveImage);
+
+document.fonts.ready.then(()=>resizeCanvas());
+resizeCanvas();
+</script>
+<script src="/dynamicblogandtool/footer.js"></script>
+<script src="/dynamicblogandtool/script.js"></script>
+</body>
+</html>

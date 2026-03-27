@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calligraphy Font Generator (𝕮𝖔𝖕𝖞 𝖆𝖓𝖉 𝕻𝖆𝖘𝖙𝖊) calligraphy texts</title>
+    <meta name="description" content="">
+    <meta name="robots" content="index, follow">
+    <link rel="apple-touch-icon" sizes="180x180" href="/dynamicblogandtool/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/dynamicblogandtool/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/dynamicblogandtool/img/favicon.png">
+    <link rel="icon" href="/dynamicblogandtool/img/favicon.png" type="image/png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Calligraphy Font Generator (𝕮𝖔𝖕𝖞 𝖆𝖓𝖉 𝕻𝖆𝖘𝖙𝖊) calligraphy texts">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="/dynamicblogandtool/img/Font-Generator.png">
+    <meta property="og:url" content="/dynamicblogandtool/tools/calligraphy.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calligraphy Font Generator (𝕮𝖔𝖕𝖞 𝖆𝖓𝖉 𝕻𝖆𝖘𝖙𝖊) calligraphy texts">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:url" content="/dynamicblogandtool/tools/calligraphy.html">
+    <meta name="twitter:image" content="/dynamicblogandtool/img/Font-Generator.png">
+    <link rel="canonical" href="/dynamicblogandtool/tools/calligraphy.html">
+    <link rel="stylesheet" href="../style.css">
+   
+</head>
+<body>
+<script src="/dynamicblogandtool/navbar.js"></script>  
+  <div class="output-list">
+<h1>Calligraphy Font Generator</h1>
+  <p>Generate Calligraphy text. A free font generator tool Calligraphy fonts and maker.</p>
+<!-- ✅ Search + Tabs together -->
+<div class="search-section" id="searchSection">
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Calligraphy Font" onfocus="this.value=''" oninput="handleInputChange()" />
+    <span class="clear-btn" onclick="clearInput()">×</span>
+  </div>
+
+   <div class="tab-wrapper">
+    <span class="scroll-btn left-btn" id="scrollLeftBtn">&lt;</span>
+    <nav class="tab-nav" id="tabNav">
+      <a href="/dynamicblogandtool/tools/cool.html" class="tab-link">Cool</a>
+      <a href="/dynamicblogandtool/tools/pretty-fonts.html" class="tab-link">Cute</a>
+      <a href="/dynamicblogandtool/tools/fancy.html" class="tab-link">Fancy</a>
+      <a href="/dynamicblogandtool/tools/cursive.html" class="tab-link">Cursive</a>
+      <a href="/dynamicblogandtool/tools/small.html" class="tab-link">Small</a>
+      <a href="/dynamicblogandtool/tools/bold.html" class="tab-link">Bold</a>
+      <a href="/dynamicblogandtool/tools/invisible.html" class="tab-link">Hidden</a>
+      <a href="/dynamicblogandtool/tools/glitch.html" class="tab-link">Glitch</a>
+      <a href="/dynamicblogandtool/tools/stylish-text-generator.html" class="tab-link">Stylish</a>
+      <a href="/dynamicblogandtool/tools/strikethrough.html" class="tab-link">Strikethrough</a>
+      <a href="/dynamicblogandtool/tools/upside-down.html" class="tab-link">Upside Down</a>
+      <a href="/dynamicblogandtool/tools/weird-text.html" class="tab-link">Weird</a>
+      <a href="/dynamicblogandtool/tools/underline-text.html" class="tab-link">Underline</a>
+      <a href="/dynamicblogandtool/tools/italic.html" class="tab-link">italic</a>
+      <a href="/dynamicblogandtool/tools/vaporwave-text.html" class="tab-link">Vaporwave</a>
+      <a href="/dynamicblogandtool/tools/japanese-text.html" class="tab-link">Japanese</a>
+      <a href="/dynamicblogandtool/tools/special.html" class="tab-link">Special</a>
+      <a href="/dynamicblogandtool/tools/demonic.html" class="tab-link">Demonic</a>
+      <a href="/dynamicblogandtool/tools/symbols.html" class="tab-link">Symbol text</a>
+    </nav>
+    <span class="scroll-btn right-btn" id="scrollRightBtn">&gt;</span>
+  </div>
+</div>
+
+    
+    
+    
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ScriptCursiveOutput" data-default="Script / Cursive / Handwriting">Script / Cursive / Handwriting</span>
+    <span class="style-name">Script / Cursive / Handwriting</span>
+  </div>
+  <button class="copy-btn" onclick="copyToClipboard('ScriptCursiveOutput')"></button>
+</div>
+
+<!-- Bold Script / Cursive / Handwriting -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="BoldScriptCursiveOutput" data-default="Bold Script / Cursive / Handwriting">Bold Script / Cursive / Handwriting</span>
+    <span class="style-name">Bold Script / Cursive / Handwriting</span>
+  </div>
+  <button class="copy-btn" onclick="copyToClipboard('BoldScriptCursiveOutput')"></button>
+</div>
+
+<!-- Gothic / Blackletter / Fraktur -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="GothicFrakturOutput" data-default="Gothic / Blackletter / Fraktur">Gothic / Blackletter / Fraktur</span>
+    <span class="style-name">Gothic / Blackletter / Fraktur</span>
+  </div>
+  <button class="copy-btn" onclick="copyToClipboard('GothicFrakturOutput')"></button>
+</div>
+
+<!-- Bold Gothic / Blackletter / Fraktur -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="BoldGothicFrakturOutput" data-default="Bold Gothic / Blackletter / Fraktur">Bold Gothic / Blackletter / Fraktur</span>
+    <span class="style-name">Bold Gothic / Blackletter / Fraktur</span>
+  </div>
+  <button class="copy-btn" onclick="copyToClipboard('BoldGothicFrakturOutput')"></button>
+</div>
+
+
+    <div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="MysticOutput" data-default="Mystic">Mystic</span>
+    <span class="style-name">Mystic</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('MysticOutput')"></button>
+</div>
+<!-- Hearts Style Output Box -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="HeartsOutput" data-default="Hearts">Hearts</span>
+    <span class="style-name">Hearts</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('HeartsOutput')"></button>
+</div>
+
+<!-- Fancy Style 1 Output Box -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="Fancy1Output" data-default="Fancy 1">Fancy 1</span>
+    <span class="style-name">Fancy Style 1</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('Fancy1Output')"></button>
+</div>
+
+<!-- Zalgo Output Box -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ZalgoOutput" data-default="Zalgo">Zalgo</span>
+    <span class="style-name">Zalgo</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('ZalgoOutput')"></button>
+</div>
+
+
+<!-- Crystal -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="CrystalOutput" data-default="Crystal">Crystal</span>
+    <span class="style-name">Crystal</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('CrystalOutput')"></button>
+</div>
+
+<!-- Arcane -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ArcaneOutput" data-default="Arcane">Arcane</span>
+    <span class="style-name">Arcane</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('ArcaneOutput')"></button>
+</div>
+
+<!-- Shadow -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ShadowOutput" data-default="Shadow">Shadow</span>
+    <span class="style-name">Shadow</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('ShadowOutput')"></button>
+</div>
+
+<!-- Solar -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="SolarOutput" data-default="Solar">Solar</span>
+    <span class="style-name">Solar</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('SolarOutput')"></button>
+</div>
+
+<!-- Ember -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="EmberOutput" data-default="Ember">Ember</span>
+    <span class="style-name">Ember</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('EmberOutput')"></button>
+</div>
+
+<!-- Frost -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="FrostOutput" data-default="Frost">Frost</span>
+    <span class="style-name">Frost</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('FrostOutput')"></button>
+</div>
+
+
+
+  <div class="output-box">
+    <div class="text-content">
+      <span class="output-text" id="CurlyOutput" data-default="⊰C⊱⊰u⊱⊰r⊱⊰l⊱⊰y⊱ ⊰W⊱⊰r⊱⊰a⊱⊰p⊱">⊰C⊱⊰u⊱⊰r⊱⊰l⊱⊰y⊱ ⊰W⊱⊰r⊱⊰a⊱⊰p⊱</span>
+      <span class="style-name">Curly Wrap</span>
+    </div>
+    <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('CurlyOutput')"></button>
+  </div>
+  
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="LoveInvertedOutput" data-default="😍💞💘 ˥oʌǝ 💔💏💖">😍💞💘 ˥oʌǝ 💔💏💖</span>
+    <span class="style-name">Love Inverted</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('LoveInvertedOutput')"></button>
+</div>
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="FrakturOutput" data-default="𝕱𝖗𝖆𝖐𝖙𝖚𝖗">𝕱𝖗𝖆𝖐𝖙𝖚𝖗</span>
+    <span class="style-name">Fraktur</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('FrakturOutput')"></button>
+</div>
+
+
+
+  <div id="copyNotification"></div>
+  </div>
+
+  <div class="contents">
+
+<h2>Stylish Calligraphy Text</h2>
+
+<p>
+Plain text doesn’t have to stay boring. With our calligraphy font generator, you can turn any word or sentence into stylish calligraphy writing in just a few clicks. This online tool helps you create elegant lettering, decorative typography, and fancy text without any design skills. Simply type your text, choose a calligraphy font style, and copy it. That’s it. No downloads, no accounts, and no payment required.
+</p>
+
+<p>
+Whether you’re working with the English alphabet or decorative Unicode characters, this calligraphy text generator gives you fast and reliable results.
+</p>
+
+<h2>How to Use</h2>
+
+<ul>
+  <li>Enter your text in the input box and start creating calligraphy letters instantly.</li>
+  <li>Browse through the available calligraphy font styles and alphabet designs.</li>
+  <li>Click or tap a font to copy it automatically.</li>
+  <li>Paste your styled text wherever you want.</li>
+</ul>
+
+<p>
+These calligraphy <a href="/dynamicblogandtool/tools/calligraphy.html">Fonts</a> work on Instagram, Facebook, Twitter, YouTube, and any platform that supports Unicode text. You can use this calligraphy font generator on mobile, tablet, or desktop without any issues.
+</p>
+
+<h2>Font Styles</h2>
+
+<p>
+You get access to a wide collection of calligraphy fonts, decorative alphabets, and fancy writing styles. Every font style is ready to copy and paste instantly, making it easy to use them for social media posts, bios, captions, blog headlines, usernames, comments, and creative lettering projects.
+</p>
+
+<ul>
+  <li><strong>Serif fonts</strong> with a classic and traditional calligraphy look</li>
+  <li><strong>Sans serif fonts</strong> that feel clean, modern, and easy to read</li>
+  <li><strong>Elegant fonts</strong> with smooth curves and refined lettering</li>
+  <li><strong>Ornate fonts</strong> designed to stand out with decorative alphabet details</li>
+  <li><strong>Script fonts</strong> that replicate handwritten calligraphy writing</li>
+</ul>
+
+<p>
+Each style is designed to make your text look unique while staying readable across platforms.
+</p>
+
+<h2>Why This Tool</h2>
+
+<ul>
+  <li>Completely free calligraphy font generator</li>
+  <li>One-click copy and paste</li>
+  <li>Works smoothly on mobile devices</li>
+  <li>No sign-up or registration required</li>
+</ul>
+
+<p>
+You can create calligraphy writing anytime without limits or restrictions.
+</p>
+
+<h2>Tips</h2>
+
+<p>
+Fancy calligraphy fonts work best for short text like names, titles, or headings. Long paragraphs are easier to read in simpler writing styles. Choose calligraphy alphabet styles that match your message. Stick to one decorative font at a time to keep your typography clean. Always preview your text on different platforms, as Unicode fonts may appear slightly different.
+</p>
+
+<h2>Supported Platforms</h2>
+
+<p>
+Our calligraphy fonts work on Instagram, Facebook, Twitter, YouTube, TikTok, Discord, WhatsApp, Telegram, WordPress, Blogger, Medium, Pinterest, Reddit, and most websites and apps that support Unicode characters.
+</p>
+
+<h2>Start Now</h2>
+
+<p>
+Begin creating custom calligraphy text now. Type your words above and explore the calligraphy font styles below to find the perfect alphabet and lettering design for your content.
+</p>
+
+<h2>Copy &amp; Paste Fonts</h2>
+
+<p>
+If you’re searching for copy-paste calligraphy fonts that actually work, this tool delivers. All fonts use Unicode characters, allowing you to copy and paste fancy calligraphy writing almost anywhere.
+</p>
+
+<p>
+From Instagram stories to YouTube descriptions, this calligraphy text generator helps your content look more creative and professional. There’s nothing to install. Copy, paste, and you’re done.
+</p>
+
+<h2>Font Generator Tool</h2>
+
+<p>
+This font generator is designed for all kinds of text styling and calligraphy writing projects. Use it for headings, posts, captions, logos, usernames, or digital branding.
+</p>
+
+<p>
+With the right calligraphy alphabet and font style, your text feels polished and intentional. These tools make typography easy, even if you’re not a designer. Your writing will stand out and leave a strong visual impression.
+</p>
+
+ </div>
+
+<script src="/dynamicblogandtool/footer.js"></script>
+
+  <script src="/dynamicblogandtool/script.js"></script>
+</body>
+</html>

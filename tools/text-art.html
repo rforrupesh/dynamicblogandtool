@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Text Art Generator - Create ASCII, Fancy & Decorative Text Art</title>
+    <meta name="description" content="">
+    <meta name="robots" content="index, follow">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon.png">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Text Art Generator - Create ASCII, Fancy & Decorative Text Art">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="../img/Font-Generator.png">
+    <meta property="og:url" content="/dynamicblogandtool/tools/text-art.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Text Art Generator - Create ASCII, Fancy & Decorative Text Art">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:url" content="/dynamicblogandtool/tools/text-art.html">
+    <meta name="twitter:image" content="../img/Font-Generator.png">
+    <link rel="canonical" href="/dynamicblogandtool/tools/text-art.html">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+    /* ✅ Responsive Container */
+    .textartgen-container {
+        width: 100%;             /* Take full width on small screens */
+        max-width: 800px;        /* Limit width on desktops */
+        margin: 0 auto;          /* Center it */
+        padding: 0 15px;         /* Add side padding for mobile */
+        box-sizing: border-box;  /* Include padding inside width */
+    }
+
+    .textartgen-title {
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: #202124;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .textartgen-intro-text {
+        font-size: 1rem;
+        color: #5f6368;
+        text-align: center;
+        margin-bottom: 2rem;
+        line-height: 1.7;
+    }
+
+    .textartgen-card {
+        background: #fff;
+        border: 1px solid #dadce0;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .textartgen-card:hover {
+        background-color: #f7f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .textartgen-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f1f3f4;
+    }
+
+    .textartgen-card-title {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: #202124;
+    }
+
+    /* ✅ ASCII Content */
+    .textartgen-content {
+        font-family: 'Courier New', monospace;
+        white-space: pre;         /* Keep ASCII formatting */
+        overflow-x: auto;         /* Allow horizontal scroll */
+        word-break: normal;       /* Prevent breaking ASCII art */
+        max-width: 100%;          /* Don’t exceed container */
+        line-height: 1.2;
+        font-size: 12px;
+        color: #333;
+        background: #fafafa;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .textartgen-content::-webkit-scrollbar {
+        height: 8px;
+    }
+    .textartgen-content::-webkit-scrollbar-thumb {
+        background: #dadce0;
+        border-radius: 4px;
+    }
+
+    .textartgen-copy-btn {
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .textartgen-copy-btn:hover {
+        background: #026cde;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
+
+    /* ✅ Notification */
+    #textartgenCopyNotification {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #007bff;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 15px;
+        display: none;
+        z-index: 999;
+    }
+
+    /* ✅ Responsive Adjustments */
+    @media (max-width: 768px) {
+        .textartgen-title { font-size: 2rem; }
+        .textartgen-card { padding: 15px; }
+        .textartgen-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+        .textartgen-content { font-size: 10px; padding: 12px; }
+    }
+
+    @media (max-width: 480px) {
+        .textartgen-title { font-size: 1.75rem; }
+        .textartgen-content { font-size: 9px; padding: 10px; }
+        .textartgen-card { padding: 12px; }
+    }
+  </style>
+
+</head>
+<body>
+<script src="/dynamicblogandtool/navbar.js"></script>
+
+    <div class="output-list">
+<h1 class="textartgen-title">Text Art</h1>
+  <p class="textartgen-intro-text">Discover and copy beautiful ASCII and Unicode text art. Paste, Funny, Face, Hand, Cool Dot Art</p>
+<!-- ✅ Search + Tabs together -->
+<div class="search-section" id="searchSection">
+
+   <div class="tab-wrapper">
+    <span class="scroll-btn left-btn" id="scrollLeftBtn">&lt;</span>
+    <nav class="tab-nav" id="tabNav">
+      <a href="/dynamicblogandtool/tools/cool.html" class="tab-link">Cool</a>
+      <a href="/dynamicblogandtool/tools/pretty-fonts.html" class="tab-link">Cute</a>
+      <a href="/dynamicblogandtool/tools/fancy.html" class="tab-link">Fancy</a>
+      <a href="/dynamicblogandtool/tools/cursive.html" class="tab-link">Cursive</a>
+      <a href="/dynamicblogandtool/tools/small.html" class="tab-link">Small</a>
+      <a href="/dynamicblogandtool/tools/bold.html" class="tab-link">Bold</a>
+      <a href="/dynamicblogandtool/tools/invisible.html" class="tab-link">Hidden</a>
+      <a href="/dynamicblogandtool/tools/glitch.html" class="tab-link">Glitch</a>
+      <a href="/dynamicblogandtool/tools/stylish-text-generator.html" class="tab-link">Stylish</a>
+      <a href="/dynamicblogandtool/tools/strikethrough.html" class="tab-link">Strikethrough</a>
+      <a href="/dynamicblogandtool/tools/upside-down.html" class="tab-link">Upside Down</a>
+      <a href="/dynamicblogandtool/tools/weird-text.html" class="tab-link">Weird</a>
+      <a href="/dynamicblogandtool/tools/underline-text.html" class="tab-link">Underline</a>
+      <a href="/dynamicblogandtool/tools/italic.html" class="tab-link">italic</a>
+      <a href="/dynamicblogandtool/tools/vaporwave-text.html" class="tab-link">Vaporwave</a>
+      <a href="/dynamicblogandtool/tools/japanese-text.html" class="tab-link">Japanese</a>
+      <a href="/dynamicblogandtool/tools/special.html" class="tab-link">Special</a>
+      <a href="/dynamicblogandtool/tools/demonic.html" class="tab-link">Demonic</a>
+      <a href="/dynamicblogandtool/tools/symbols.html" class="tab-link">Symbol text</a>
+    </nav>
+    <span class="scroll-btn right-btn" id="scrollRightBtn">&gt;</span>
+  </div>
+</div>
+
+    <div class="textartgen-container">
+
+        <!-- Text Art 1 -->
+        <div class="textartgen">
+            <div class="textartgen-card">
+                <div class="textartgen-header">
+                    <div class="textartgen-card-title">Among Us Character</div>
+                </div>
+                <div class="textartgen-content">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠈⢻⣿⣿⡄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣸⣿⡏⠀⠀⠀⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⠁⠀⠀⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣷⡄⠀
+⠀⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⠀
+⠀⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⣿⠀
+⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀
+⠀⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇⠀⠀
+⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣧⠀⠀
+⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀
+⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠀⠀
+⠀⢿⣿⡆⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀
+⠀⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠃⠀⠀
+⠀⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶⠶⠀⢠⣿⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀⢸⣿⡇⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀⣸⣿⠇⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</div>
+            </div>
+        </div>
+
+        <!-- Text Art 2 -->
+        <div class="textartgen">
+            <div class="textartgen-card">
+                <div class="textartgen-header">
+                    <div class="textartgen-card-title">Cute Cat</div>
+                </div>
+                <div class="textartgen-content">  /\_/\  
+ ( o.o ) 
+  > ^ <</div>
+            </div>
+        </div>
+
+        <!-- Text Art 3 -->
+        <div class="textartgen">
+            <div class="textartgen-card">
+                <div class="textartgen-header">
+                    <div class="textartgen-card-title">Diamond Star</div>
+                </div>
+                <div class="textartgen-content">    *    
+   ***   
+  *****  
+ ******* 
+*********
+ ******* 
+  *****  
+   ***   
+    *</div>
+            </div>
+        </div>
+
+        <!-- Text Art 4 -->
+        <div class="textartgen">
+            <div class="textartgen-card">
+                <div class="textartgen-header">
+                    <div class="textartgen-card-title">Message Box</div>
+                </div>
+                <div class="textartgen-content">┌─────────────────┐
+│   HELLO WORLD   │
+└─────────────────┘</div>
+            </div>
+        </div>
+
+        <!-- Text Art 5 -->
+        <div class="textartgen">
+            <div class="textartgen-card">
+                <div class="textartgen-header">
+                    <div class="textartgen-card-title">Simple Bird</div>
+                </div>
+                <div class="textartgen-content">       /|
+      / |__
+     /    o\
+    /      |
+   /   \___/
+  /         
+ /           
+(__________</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="textartgenCopyNotification">Copied to clipboard!</div>
+
+  
+
+  <script>
+        // Automatically add copy buttons to all .textartgen divs
+        document.addEventListener('DOMContentLoaded', function() {
+            const textArtDivs = document.querySelectorAll('.textartgen');
+            
+            textArtDivs.forEach(function(div) {
+                // Create copy button
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'textartgen-copy-btn';
+                copyBtn.innerHTML = `
+                    <svg class="textartgen-copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy
+                `;
+                copyBtn.onclick = function() {
+                    textartgenCopyTextArt(this);
+                };
+                
+                // Add button to the header
+                const header = div.querySelector('.textartgen-header');
+                header.appendChild(copyBtn);
+            });
+        });
+
+        function textartgenCopyTextArt(button) {
+            // Get the text content from the textartgen-content div
+            const textArtDiv = button.closest('.textartgen');
+            const contentDiv = textArtDiv.querySelector('.textartgen-content');
+            const textToCopy = contentDiv.textContent;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // Visual feedback
+                const originalHTML = button.innerHTML;
+                button.innerHTML = `
+                    <svg class="textartgen-copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                    Copied!
+                `;
+                button.classList.add('textartgen-copied');
+                
+                // Show notification
+                textartgenShowNotification('Copied to clipboard!');
+                
+                // Reset button after 2 seconds
+                setTimeout(function() {
+                    button.innerHTML = originalHTML;
+                    button.classList.remove('textartgen-copied');
+                }, 2000);
+            }).catch(function(err) {
+                textartgenShowNotification('Failed to copy text art');
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function textartgenShowNotification(message) {
+            const notification = document.getElementById('textartgenCopyNotification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 2500);
+        }
+    </script>
+
+
+
+
+  <div id="copyNotification"></div>
+  </div>
+
+  <div class="contents">
+    <!-- Article Content: Text Art Generator (Simplified) -->
+    
+    <h2>What is a Text Art Generator?</h2>
+    <p>
+        A Text Art Generator is a simple online tool that turns your regular text into cool, decorated styles. 
+        It uses special symbols instead of normal letters, so you can copy and paste the art anywhere online without needing to install new fonts.
+    </p>
+
+    <h2>Why Use Text Art?</h2>
+    <ul>
+        <li>
+            <strong>Social Media:</strong> Get attention for your posts and bios on platforms like Instagram, Facebook, and TikTok.
+        </li>
+        <li>
+            <strong>Gaming:</strong> Create unique usernames or clan tags for online games.
+        </li>
+        <li>
+            <strong>Messaging Apps:</strong> Send fun and expressive messages on chats like WhatsApp and Discord.
+        </li>
+        <li>
+            <strong>Creative Fun:</strong> Add a unique, artistic look to your digital signatures or projects.
+        </li>
+        <li>
+            <strong>Personal Look:</strong> Develop a distinctive style for your online identity.
+        </li>
+    </ul>
+
+    <h2>How to Use This Tool:</h2>
+    <ol>
+        <li>Type Your Text: Put the words you want to change into the input box.</li>
+        <li>Instant Styles: The tool quickly shows you your text in different art styles below.</li>
+        <li>Copy & Paste: Select the style you like and click the "Copy" button.</li>
+        <li>Use Anywhere: Paste the text art into your favorite app or platform.</li>
+    </ol>
+
+    <h2>Questions About Text Art (FAQ)</h2>
+    
+    <!-- FAQ 1 -->
+    <p><strong>Q: How does this tool create text art?</strong></p>
+    <p>
+        A: It swaps your regular letters for special symbols (Unicode) that look artistic, like letters in circles or mirrored symbols. It's a simple character replacement.
+    </p>
+
+    <!-- FAQ 2 -->
+    <p><strong>Q: Will text art work everywhere?</strong></p>
+    <p>
+        A: It works on most modern phones, computers, and platforms because the characters are standard. Very old systems might not display the symbols correctly.
+    </p>
+    
+    <!-- FAQ 3 -->
+    <p><strong>Q: Can I use numbers and symbols?</strong></p>
+    <p>
+        A: Yes, many art styles include versions of numbers and some common symbols, depending on the style you pick.
+    </p>
+
+    <!-- FAQ 4 -->
+    <p><strong>Q: Is text art easy for screen readers to read?</strong></p>
+    <p>
+        A: Sometimes, screen readers (tools for people with visual impairment) have trouble reading text art correctly. Use it mainly for looks, not for important information.
+    </p>
+</div>
+
+
+
+<script src="/dynamicblogandtool/footer.js"></script>
+
+  <script src="/dynamicblogandtool/script.js"></script>
+</body>
+</html>

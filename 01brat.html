@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Brat Font Generator: Create Stylish Album Art Text</title>
+  <meta name="description" content="Generate brat-style album art text. Copy and paste or download your custom design. Fully responsive and free to use.">
+  <meta name="robots" content="index, follow">
+  <link rel="apple-touch-icon" sizes="180x180" href="/dynamicblogandtool/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/dynamicblogandtool/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/dynamicblogandtool/img/favicon.png">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+  
+  <!-- CSS Integration -->
+  <link rel="stylesheet" href="./style.css">
+
+  <style>
+    /* ── GENERATOR SPECIFIC OVERRIDES ── */
+    :root {
+      --brat-bg: #ebebeb;
+      --brat-panel: #f4f4f4;
+      --brat-card: #ffffff;
+      --brat-border: #e0e0e0;
+      --brat-text: #111111;
+      --brat-accent: #8ace00;
+    }
+
+    .generator-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .brat-app {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      background: var(--brat-bg);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid var(--brat-border);
+      margin-bottom: 40px;
+    }
+
+    .brat-canvas-pane {
+      background: var(--brat-card);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      min-height: 400px;
+    }
+
+    .brat-canvas-wrap {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 1/1;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    #mainCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .brat-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ctrl-group {
+      background: var(--brat-card);
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--brat-border);
+    }
+
+    .ctrl-label {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .color-dots { display: flex; gap: 10px; }
+    .dot {
+      width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+      border: 3px solid transparent; transition: 0.2s;
+    }
+    .dot.active { border-color: var(--brat-text); transform: scale(1.1); }
+
+    .pill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pill {
+      background: #f8f8f8; border: 1px solid var(--brat-border);
+      padding: 10px; border-radius: 10px; cursor: pointer;
+      font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 700;
+      transition: 0.2s; text-align: center;
+    }
+    .pill.active { background: var(--brat-text); color: #fff; border-color: var(--brat-text); }
+
+    textarea {
+      width: 100%; height: 90px; padding: 12px; border-radius: 12px;
+      border: 1px solid var(--brat-border); font-family: 'Unbounded', sans-serif;
+      font-size: 14px; resize: none; background: #fdfdfd;
+    }
+
+    .save-btn {
+      background: #000; color: #fff; border: none; padding: 18px;
+      border-radius: 14px; font-family: 'Unbounded', sans-serif;
+      font-weight: 900; cursor: pointer; width: 100%; font-size: 14px;
+      transition: transform 0.1s;
+    }
+    .save-btn:active { transform: scale(0.98); }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-area {
+      background: #fff;
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid var(--brat-border);
+      margin-bottom: 50px;
+    }
+
+    .content-area h1, .content-area h2 { font-family: 'Unbounded', sans-serif; margin-bottom: 20px; }
+    .content-area p { margin-bottom: 20px; line-height: 1.8; color: #444; }
+    .content-area ul { margin-left: 20px; margin-bottom: 25px; }
+    .content-area li { margin-bottom: 10px; }
+
+    .faq-item { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+    .faq-q { font-weight: 900; font-family: 'Unbounded', sans-serif; font-size: 14px; color: #000; display: block; margin-bottom: 8px; }
+
+    @media (max-width: 900px) {
+      .brat-app { grid-template-columns: 1fr; }
+      .brat-controls { order: 2; }
+      .brat-canvas-pane { order: 1; padding: 20px; min-height: 300px; }
+      .content-area { padding: 25px; }
+    }
+    #exportCanvas { display: none; }
+  </style>
+</head>
+<body>
+
+<script src="/dynamicblogandtool/navbar.js"></script>
+
+<canvas id="exportCanvas"></canvas>
+
+<div class="generator-container">
+  <h1 style="text-align: center; margin: 30px 0; font-family: 'Unbounded', sans-serif; font-size: clamp(1.5rem, 5vw, 2.5rem);">Brat Album Cover Generator</h1>
+  
+  <div class="brat-app">
+    <div class="brat-canvas-pane">
+      <div class="brat-canvas-wrap" id="canvasWrap">
+        <canvas id="mainCanvas"></canvas>
+      </div>
+    </div>
+
+  <div class="brat-controls">
+      <div class="ctrl-group">
+        <div class="ctrl-label">Background Color</div>
+        <div class="color-dots">
+          <div class="dot dot-lime active" data-bg="#8ace00" data-fg="#111111"></div>
+          <div class="dot dot-black" data-bg="#111111" data-fg="#ffffff"></div>
+          <div class="dot dot-white" data-bg="#ffffff" data-fg="#111111"></div>
+          <div class="dot dot-blue" data-bg="#2244dd" data-fg="#ffffff"></div>
+          <div class="dot dot-red" data-bg="#cc1111" data-fg="#ffffff"></div>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">Visual Style</div>
+        <div class="pill-grid">
+          <button class="pill active" data-mode="blur">blur</button>
+          <button class="pill" data-mode="scribble">scribble</button>
+          <button class="pill" data-mode="mirror">mirror</button>
+          <button class="pill" data-mode="clean">clean</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">Presets</div>
+        <div class="presets-list">
+          <button class="tpill active" data-text="brat">brat</button>
+          <button class="tpill" data-text="it's the same but there's three more songs">3 more songs</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">Custom Text</div>
+        <textarea id="textInput" maxlength="200">brat</textarea>
+      </div>
+
+      <button class="save-btn" id="saveBtn">DOWNLOAD PNG</button>
+    </div>
+  </div>
+
+  <div class="content-area">
+    <h2>Make Your Own Brat Album Cover</h2>
+    <p>Welcome to the ultimate <strong>Brat Font Generator</strong>. Inspired by Charli XCX's iconic "Brat" album aesthetic, this tool helps you create custom artwork featuring the signature lime green background and low-fidelity Arial typography that defined a summer of club culture.</p>
+    
+    <h3>Step-by-Step Guide</h3>
+    <ul>
+      <li><strong>Enter Text:</strong> Use the text area to type your message. All text is automatically converted to lowercase to match the "Brat" style.</li>
+      <li><strong>Style Effects:</strong> Choose <em>Blur</em> for the classic hazy look, <em>Scribble</em> for an underground punk vibe, or <em>Clean</em> for high-contrast sharpness.</li>
+      <li><strong>Download:</strong> Click the download button to export a high-resolution 1080x1080 square image, perfect for profile pictures or social media posts.</li>
+    </ul>
+
+    <h3>Why is the "Brat" Look so Popular?</h3>
+    <p>The "Brat" aesthetic is a masterclass in intentional lo-fi design. By using a standard web font (Arial) on a high-visibility lime green background (#8ace00), the design rejects traditional polish in favor of raw, immediate energy. It's accessible, instantly recognizable, and perfectly suited for the meme era.</p>
+
+    <h3>Frequently Asked Questions</h3>
+    <div class="faq-item">
+      <span class="faq-q">What is the hex code for Brat Green?</span>
+      <p>The specific lime green used is <strong>#8ace00</strong>. Our generator uses this as the default background color.</p>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">What font does Charli XCX use on Brat?</span>
+      <p>The album art uses a version of <strong>Arial Narrow Italic</strong> (or simply Arial Bold with specific tracking). Our generator replicates this using a bold sans-serif stack to ensure it looks right on all devices.</p>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Is this tool free?</span>
+      <p>Yes! This generator is completely free for personal use, allowing fans to join the "Brat Summer" movement with their own custom text.</p>
+    </div>
+  </div>
+</div>
+
+<script src="/dynamicblogandtool/footer.js"></script>
+
+  <script src="/dynamicblogandtool/script.js"></script>
+
+
+
+<script>
+  let bgColor = '#8ace00', fgColor = '#111111', mode = 'blur', userText = 'brat';
+  let mainCanvas, exportCanvas, mc, ec, wrap, textarea;
+
+  function draw(ctx, s, rawText, m, bg, fg) {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, s, s);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, s, s);
+
+    const t = rawText.toLowerCase().trim() || 'brat';
+    ctx.save();
+    
+    const maxW = s * 0.85;
+    const fs = calculateFontSize(ctx, s, t, maxW);
+    ctx.font = `900 ${fs}px Arial, sans-serif`;
+    ctx.fillStyle = fg;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const lines = getLines(ctx, t, maxW);
+    const lh = fs * 1.05;
+    const totalH = lines.length * lh;
+    const startY = s/2 - totalH/2 + lh/2;
+
+    if (m === 'blur') {
+      const steps = 12;
+      const bRad = s * 0.005;
+      ctx.globalAlpha = 0.1;
+      for (let i = 0; i < steps; i++) {
+        const ang = (i / steps) * Math.PI * 2;
+        lines.forEach((ln, idx) => {
+          ctx.fillText(ln, s/2 + Math.cos(ang)*bRad, startY + idx*lh + Math.sin(ang)*bRad);
+        });
+      }
+      ctx.globalAlpha = 1;
+      lines.forEach((ln, idx) => ctx.fillText(ln, s/2, startY + idx*lh));
+    } else if (m === 'scribble') {
+      lines.forEach((ln, idx) => ctx.fillText(ln, s/2, startY + idx*lh));
+      ctx.strokeStyle = fg; ctx.lineWidth = s * 0.002; ctx.globalAlpha = 0.3;
+      for (let i = 0; i < 20; i++) {
+        ctx.beginPath();
+        ctx.moveTo(Math.random()*s, Math.random()*s);
+        ctx.lineTo(Math.random()*s, Math.random()*s);
+        ctx.stroke();
+      }
+    } else if (m === 'mirror') {
+      ctx.translate(s, 0); ctx.scale(-1, 1);
+      lines.forEach((ln, idx) => ctx.fillText(ln, s/2, startY + idx*lh));
+    } else {
+      lines.forEach((ln, idx) => ctx.fillText(ln, s/2, startY + idx*lh));
+    }
+    ctx.restore();
+  }
+
+  function calculateFontSize(ctx, s, text, maxW) {
+    let size = s * 0.25;
+    ctx.font = `900 ${size}px Arial`;
+    while (size > 10) {
+      const lines = getLines(ctx, text, maxW);
+      const totalH = lines.length * size * 1.1;
+      if (totalH < s * 0.8 && Math.max(...lines.map(l => ctx.measureText(l).width)) < maxW) break;
+      size -= 2;
+      ctx.font = `900 ${size}px Arial`;
+    }
+    return size;
+  }
+
+  function getLines(ctx, text, maxW) {
+    const words = text.split(/\s+/), lines = [];
+    let cur = words[0] || '';
+    for (let i = 1; i < words.length; i++) {
+      if (ctx.measureText(cur + " " + words[i]).width < maxW) cur += " " + words[i];
+      else { lines.push(cur); cur = words[i]; }
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  }
+
+  function render() { if (mc) draw(mc, mainCanvas.width, userText, mode, bgColor, fgColor); }
+
+  function resize() {
+    if (!wrap || !mainCanvas) return;
+    const size = wrap.clientWidth;
+    mainCanvas.width = mainCanvas.height = size;
+    render();
+  }
+
+  window.onload = function() {
+    mainCanvas = document.getElementById('mainCanvas');
+    exportCanvas = document.getElementById('exportCanvas');
+    mc = mainCanvas.getContext('2d');
+    ec = exportCanvas.getContext('2d');
+    wrap = document.getElementById('canvasWrap');
+    textarea = document.getElementById('textInput');
+
+    textarea.oninput = (e) => { 
+      userText = e.target.value; 
+      document.querySelectorAll('.tpill').forEach(x => x.classList.remove('active'));
+      render(); 
+    };
+    
+    document.querySelectorAll('.dot').forEach(d => {
+      d.onclick = () => {
+        document.querySelectorAll('.dot').forEach(x => x.classList.remove('active'));
+        d.classList.add('active'); bgColor = d.dataset.bg; fgColor = d.dataset.fg; render();
+      }
+    });
+
+    document.querySelectorAll('.pill').forEach(p => {
+      p.onclick = () => {
+        if (p.classList.contains('tpill')) {
+          document.querySelectorAll('.tpill').forEach(x => x.classList.remove('active'));
+          userText = p.dataset.text; textarea.value = userText;
+        } else {
+          document.querySelectorAll('.pill:not(.tpill)').forEach(x => x.classList.remove('active'));
+          mode = p.dataset.mode;
+        }
+        p.classList.add('active'); render();
+      }
+    });
+
+    document.getElementById('saveBtn').onclick = () => {
+      exportCanvas.width = exportCanvas.height = 1080;
+      draw(ec, 1080, userText, mode, bgColor, fgColor);
+      const link = document.createElement('a');
+      link.download = 'brat-generator.png';
+      link.href = exportCanvas.toDataURL();
+      link.click();
+    };
+
+    window.onresize = resize;
+    resize();
+  };
+</script>
+</body>
+</html>

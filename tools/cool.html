@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cool Text Generator - Stylish Fonts & Fancy Text Converter</title>
+    <meta name="description" content="Generate cool and fancy text styles like bold italic, double-struck, monospace, and circled text. Perfect for social media, gaming, and unique online profiles.">
+    <meta name="robots" content="index, follow">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon.png">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cool Text Generator - Stylish Fonts & Fancy Text Converter">
+    <meta property="og:description" content="Generate cool and fancy text styles like bold italic, double-struck, monospace, and circled text. Perfect for social media, gaming, and unique online profiles.">
+    <meta property="og:image" content="../img/Font-Generator.png">
+    <meta property="og:url" content="/dynamicblogandtool/tools/cool.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cool Text Generator - Stylish Fonts & Fancy Text Converter">
+    <meta name="twitter:description" content="Generate cool and fancy text styles like bold italic, double-struck, monospace, and circled text. Perfect for social media, gaming, and unique online profiles.">
+    <meta name="twitter:url" content="/dynamicblogandtool/tools/cool.html">
+    <meta name="twitter:image" content="../img/Font-Generator.png">
+    <link rel="canonical" href="/dynamicblogandtool/tools/cool.html">
+    <link rel="stylesheet" href="../style.css">
+  
+</head>
+<body>
+<script src="/dynamicblogandtool/navbar.js"></script>
+   
+      <div class="output-list">
+<h1>Cool Text Generator</h1>
+  <p>Generate Cool Text Fonts  by typing and copy it in font styles. cool stylish looking fancy text.</p>
+<!-- ✅ Search + Tabs together -->
+<div class="search-section" id="searchSection">
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type something..." onfocus="this.value=''" oninput="handleInputChange()" />
+    <span class="clear-btn" onclick="clearInput()">×</span>
+  </div>
+
+   <div class="tab-wrapper">
+    <span class="scroll-btn left-btn" id="scrollLeftBtn">&lt;</span>
+    <nav class="tab-nav" id="tabNav">
+      <a href="/dynamicblogandtool/tools/cool.html" class="tab-link">Cool</a>
+      <a href="/dynamicblogandtool/tools/pretty-fonts.html" class="tab-link">Cute</a>
+      <a href="/dynamicblogandtool/tools/fancy.html" class="tab-link">Fancy</a>
+      <a href="/dynamicblogandtool/tools/cursive.html" class="tab-link">Cursive</a>
+      <a href="/dynamicblogandtool/tools/small.html" class="tab-link">Small</a>
+      <a href="/dynamicblogandtool/tools/bold.html" class="tab-link">Bold</a>
+      <a href="/dynamicblogandtool/tools/invisible.html" class="tab-link">Hidden</a>
+      <a href="/dynamicblogandtool/tools/glitch.html" class="tab-link">Glitch</a>
+      <a href="/dynamicblogandtool/tools/stylish-text-generator.html" class="tab-link">Stylish</a>
+      <a href="/dynamicblogandtool/tools/strikethrough.html" class="tab-link">Strikethrough</a>
+      <a href="/dynamicblogandtool/tools/upside-down.html" class="tab-link">Upside Down</a>
+      <a href="/dynamicblogandtool/tools/weird-text.html" class="tab-link">Weird</a>
+      <a href="/dynamicblogandtool/tools/underline-text.html" class="tab-link">Underline</a>
+      <a href="/dynamicblogandtool/tools/italic.html" class="tab-link">italic</a>
+      <a href="/dynamicblogandtool/tools/vaporwave-text.html" class="tab-link">Vaporwave</a>
+      <a href="/dynamicblogandtool/tools/japanese-text.html" class="tab-link">Japanese</a>
+      <a href="/dynamicblogandtool/tools/special.html" class="tab-link">Special</a>
+      <a href="/dynamicblogandtool/tools/demonic.html" class="tab-link">Demonic</a>
+      <a href="/dynamicblogandtool/tools/symbols.html" class="tab-link">Symbol text</a>
+    </nav>
+    <span class="scroll-btn right-btn" id="scrollRightBtn">&gt;</span>
+  </div>
+</div>
+
+
+
+<!-- Mystic -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="MysticOutput" data-default="Mystic">Mystic</span>
+    <span class="style-name">Mystic</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('MysticOutput')"></button>
+</div>
+<!-- Hearts Style Output Box -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="HeartsOutput" data-default="Hearts">Hearts</span>
+    <span class="style-name">Hearts</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('HeartsOutput')"></button>
+</div>
+
+<!-- Fancy Style 1 Output Box -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="Fancy1Output" data-default="Fancy 1">Fancy 1</span>
+    <span class="style-name">Fancy Style 1</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('Fancy1Output')"></button>
+</div>
+
+<!-- Zalgo Output Box -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ZalgoOutput" data-default="Zalgo">Zalgo</span>
+    <span class="style-name">Zalgo</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('ZalgoOutput')"></button>
+</div>
+
+
+<!-- Crystal -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="CrystalOutput" data-default="Crystal">Crystal</span>
+    <span class="style-name">Crystal</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('CrystalOutput')"></button>
+</div>
+
+<!-- Arcane -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ArcaneOutput" data-default="Arcane">Arcane</span>
+    <span class="style-name">Arcane</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('ArcaneOutput')"></button>
+</div>
+
+<!-- Shadow -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="ShadowOutput" data-default="Shadow">Shadow</span>
+    <span class="style-name">Shadow</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('ShadowOutput')"></button>
+</div>
+
+<!-- Solar -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="SolarOutput" data-default="Solar">Solar</span>
+    <span class="style-name">Solar</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('SolarOutput')"></button>
+</div>
+
+<!-- Ember -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="EmberOutput" data-default="Ember">Ember</span>
+    <span class="style-name">Ember</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('EmberOutput')"></button>
+</div>
+
+<!-- Frost -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="FrostOutput" data-default="Frost">Frost</span>
+    <span class="style-name">Frost</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('FrostOutput')"></button>
+</div>
+
+<!-- Storm -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="StormOutput" data-default="Storm">Storm</span>
+    <span class="style-name">Storm</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('StormOutput')"></button>
+</div>
+
+<!-- Lunar -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="LunarOutput" data-default="Lunar">Lunar</span>
+    <span class="style-name">Lunar</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('LunarOutput')"></button>
+</div>
+
+<!-- Cosmic -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="CosmicOutput" data-default="Cosmic">Cosmic</span>
+    <span class="style-name">Cosmic</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('CosmicOutput')"></button>
+</div>
+
+<!-- Rune -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="RuneOutput" data-default="Rune">Rune</span>
+    <span class="style-name">Rune</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('RuneOutput')"></button>
+</div>
+
+<!-- Infernal -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="InfernalOutput" data-default="Infernal">Infernal</span>
+    <span class="style-name">Infernal</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('InfernalOutput')"></button>
+</div>
+
+<!-- Aurora -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="AuroraOutput" data-default="Aurora">Aurora</span>
+    <span class="style-name">Aurora</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('AuroraOutput')"></button>
+</div>
+
+<!-- Twilight -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="TwilightOutput" data-default="Twilight">Twilight</span>
+    <span class="style-name">Twilight</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('TwilightOutput')"></button>
+</div>
+
+<!-- Ethereal -->
+<div class="output-box">
+  <div class="text-content">
+    <span class="output-text" id="EtherealOutput" data-default="Ethereal">Ethereal</span>
+    <span class="style-name">Ethereal</span>
+  </div>
+  <button class="copy-btn" aria-label="Copy text" onclick="copyToClipboard('EtherealOutput')"></button>
+</div>
+
+
+
+
+
+
+  <div id="copyNotification"></div>
+  </div>
+
+
+  <div class="contents"> 
+    <h2>What is a Cool Text Generator?</h2>
+    <p>
+        A Cool Text Generator is an online tool that converts standard text into various stylish and decorative Unicode character sets. 
+        These aren't traditional fonts installed on your computer, but rather unique characters that look like different fonts, 
+        allowing them to be copied and pasted across almost all digital platforms.
+    </p>
+
+    <h2>Uses for Cool Text:</h2>
+    <ul>
+        <li>
+            <strong>Social Media Profiles:</strong> Make your Instagram bio, Twitter profile, Facebook posts, or TikTok captions stand out.
+        </li>
+        <li>
+            <strong>Gaming Usernames:</strong> Create unique and eye-catching names in games like Free Fire, PUBG, or Call of Duty.
+        </li>
+        <li>
+            <strong>Messaging Apps:</strong> Send stylish messages on WhatsApp, Discord, Telegram, and more.
+        </li>
+        <li>
+            <strong>Creative Content:</strong> Enhance blog titles, website headers, or graphic designs with unique typography.
+        </li>
+        <li>
+            <strong>Personal Branding:</strong> Add a distinctive touch to your online presence.
+        </li>
+    </ul>
+
+    <h2>How to Use This Tool:</h2>
+    <ol>
+        <li>Enter Text: Type or paste your text into the input box at the top.</li>
+        <li>Instant Conversion: As you type, the tool will automatically generate your text in multiple cool styles below.</li>
+        <li>Copy Your Favorite: Click the "Copy" button next to the style you like.</li>
+        <li>Paste Anywhere: Paste the copied cool text into your desired application or platform.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions (FAQ) about Cool Text</h2>
+    
+    <!-- FAQ 1 -->
+    <p><strong>Q: How does this tool generate cool text?</strong></p>
+    <p>
+        A: It uses Unicode characters. Unicode is a universal character encoding standard that includes thousands of symbols, 
+        including many that resemble different font styles (like bold, italic, monospace, etc.).
+    </p>
+
+    <!-- FAQ 2 -->
+    <p><strong>Q: Will these cool fonts work everywhere?</strong></p>
+    <p>
+        A: Most modern devices, browsers, and social media platforms support these Unicode characters. However, 
+        very old systems or specific niche applications might not render them correctly, showing squares or question marks instead.
+    </p>
+    
+    <!-- FAQ 3 -->
+    <p><strong>Q: Can I use numbers and symbols with cool text?</strong></p>
+    <p>
+        A: The conversion primarily works for Latin alphabet characters. While some Unicode blocks include numbers and symbols in these styles, 
+        comprehensive support for all digits and special characters across all cool styles may vary.
+    </p>
+
+    <!-- FAQ 4 -->
+    <p><strong>Q: Is it safe to use these characters?</strong></p>
+    <p>
+        A: Yes, they are standard Unicode characters and are perfectly safe to use. They are not harmful or malicious in any way.
+    </p>
+  </div>    
+<script src="/dynamicblogandtool/footer.js"></script>
+
+  <script src="/dynamicblogandtool/script.js"></script>
+</body>
+</html>

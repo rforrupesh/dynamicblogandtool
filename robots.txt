@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rforrupesh.github.io/dynamicblogandtool/sitemap.xml
