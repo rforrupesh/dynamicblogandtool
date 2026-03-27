@@ -1,63 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 Not Found</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f5f9ff;
-      color: #333;
-      text-align: center;
-    }
+---
+layout: default
+title: "Page Not Found"
+description: "The page you're looking for doesn't exist. Head back to the FontCraft font generator."
+permalink: /404.html
+---
 
-    svg {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 4rem;
-      margin: 0;
-      color: #1a73e8;
-    }
-
-    p {
-      margin: 10px 0 20px;
-      color: #555;
-    }
-
-    a {
-      padding: 10px 20px;
-      background: #1a73e8;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
-
-    a:hover {
-      background: #155ab6;
-    }
-  </style>
-</head>
-<body>
-  <!-- Simple magnifying glass SVG -->
-  <svg viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="11" cy="11" r="8"></circle>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-  </svg>
-
-  <h1>404</h1>
-  <p>Sorry, the page you’re looking for can’t be found.</p>
-  <a href="/dynamicblogandtool/">Go Home</a>
-</body>
-</html>
+<section class="error-page">
+  <div class="error-inner">
+    <div class="error-code">𝟜𝟘𝟜</div>
+    <h1>Page Not Found</h1>
+    <p>The page you're looking for doesn't exist or has moved.</p>
+    <div class="error-actions">
+      <a href="{{ '/' | relative_url }}" class="btn-primary">Go to Font Generator →</a>
+      <a href="{{ '/tools/' | relative_url }}" class="btn-secondary">Browse Tools</a>
+      <a href="{{ '/blog/' | relative_url }}" class="btn-secondary">Read Blog</a>
+    </div>
+  </div>
+</section>
