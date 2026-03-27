@@ -27,4 +27,4 @@ defaults:
       show_sidebar: true
 
 markdown: kramdown
-permalink: /blog/:year/:month/:slug/
+permalink: /:slug/
