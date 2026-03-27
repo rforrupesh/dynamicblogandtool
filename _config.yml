@@ -1,0 +1,56 @@
+# ─────────────────────────────────
+# Jekyll Config — FontGen GitHub Pages
+# Site: https://rforrupesh.github.io/dynamicblogandtool/
+# ─────────────────────────────────
+
+url:     "https://rforrupesh.github.io"
+baseurl: "/dynamicblogandtool"
+
+# Site info
+title:       "Font Generator - Cool Fancy Text"
+description: "Font Generator tool to convert text into fancy and custom fonts for social media."
+author:      "FontGen"
+lang:        "en"
+
+# Google / Ads
+google_analytics: "G-0W5M4KP1HL"
+adsense_client:   "ca-pub-1820825216397031"
+
+# SEO defaults
+og_image:     "/dynamicblogandtool/img/favicon.png"
+twitter_card: "summary_large_image"
+
+# Build
+theme:      null
+markdown:   kramdown
+highlighter: rouge
+
+# Default layout for all pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "tools"
+    values:
+      layout: default
+  - scope:
+      path: "different-fonts"
+    values:
+      layout: default
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - replace_nav_footer.py
+
+# Include special files
+include:
+  - .nojekyll
+  - ads.txt
+  - ahrefs_7281af677c4153c6fe67b774b0c8fcb105980eaf4ff5cd7b16573f13257ac1ae
+
+encoding: utf-8

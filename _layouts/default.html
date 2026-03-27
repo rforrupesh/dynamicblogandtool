@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+  {% include head.html %}
+  {% if page.structured_data %}
+  <script type="application/ld+json">{{ page.structured_data }}</script>
+  {% endif %}
+</head>
+<body>
+
+{% include navbar.html %}
+
+{{ content }}
+
+{% include scripts.html %}
+</body>
+</html>
