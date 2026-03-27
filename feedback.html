@@ -1,0 +1,74 @@
+---
+layout: default
+title: 'Feedback'
+og_image: './img/Font-Generator.png'
+---
+<div class="contents">
+        <div class="feedback-container">
+            <h1>Share Your Feedback</h1>
+            <p>We are constantly striving to improve Font Generator and provide you with the best possible experience. Your feedback is invaluable to us! Please use the form below to share your thoughts, suggestions, report bugs, or request new features.</p>
+
+            <form class="feedback-form" id="feedbackForm">
+                <label for="feedbackName">Your Name (Optional):</label>
+                <input type="text" id="feedbackName" name="feedbackName" placeholder="Enter your name">
+
+                <label for="feedbackEmail">Your Email (Optional):</label>
+                <input type="email" id="feedbackEmail" name="feedbackEmail" placeholder="Enter your email address">
+
+                <label for="feedbackType">Type of Feedback:</label>
+                <select id="feedbackType" name="feedbackType" required>
+                    <option value="">Select an option</option>
+                    <option value="suggestion">Suggestion / Feature Request</option>
+                    <option value="bug">Bug Report</option>
+                    <option value="general">General Feedback</option>
+                    <option value="compliment">Compliment</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <label for="feedbackMessage">Your Message:</label>
+                <textarea id="feedbackMessage" name="feedbackMessage" required placeholder="Tell us what you think..."></textarea>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+
+            <div class="feedback-info">
+                <h2>Why Your Feedback Matters</h2>
+                <p>Your insights help us understand what's working well and where we can make improvements. We genuinely appreciate you taking the time to help us grow and make Font Generator even better for everyone.</p>
+                <p>For urgent inquiries or direct support, please visit our <a href="./contact-us.html">Contact Us</a> page.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const feedbackForm = document.getElementById('feedbackForm');
+
+            feedbackForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent actual form submission
+
+                const name = document.getElementById('feedbackName').value;
+                const email = document.getElementById('feedbackEmail').value;
+                const type = document.getElementById('feedbackType').value;
+                const message = document.getElementById('feedbackMessage').value;
+
+                // Basic client-side validation
+                if (!type || !message) {
+                    alert('Please select a feedback type and enter your message.');
+                    return;
+                }
+
+                // In a real application, you would send this data to a server
+                // using fetch() or XMLHttpRequest. For this example, we'll just log it.
+                console.log('Feedback Form Submission:');
+                console.log('Name:', name || 'N/A');
+                console.log('Email:', email || 'N/A');
+                console.log('Type:', type);
+                console.log('Message:', message);
+
+                // Simulate success message
+                alert('Thank you for your feedback! We appreciate your input.');
+
+                // Clear the form
+                feedbackForm.reset();
+            });
+        });
+    </script>

@@ -1,0 +1,345 @@
+---
+layout: default
+title: 'Cool Symbol - 🅒🅞🅟🅨 𝕒𝕟𝕕 𝓅𝒶𝓈𝓉𝑒'
+---
+<div class="output-list">
+<h1>Cool Symbols
+</h1>
+  <p> Click any box to copy the symbol to clipboard (CopyAlt system).
+
+
+</p>
+
+<div class="nav-overlay" id="navOverlay"></div>
+  <div class="search-section" id="searchSection">
+
+   <div class="tab-wrapper">
+    <span class="scroll-btn left-btn" id="scrollLeftBtn">&lt;</span>
+    <nav class="tab-nav" id="tabNav">
+      <a href="/dynamicblogandtool/tools/cool.html" class="tab-link">Cool</a>
+      <a href="/dynamicblogandtool/tools/pretty-fonts.html" class="tab-link">Cute</a>
+      <a href="/dynamicblogandtool/tools/fancy.html" class="tab-link">Fancy</a>
+      <a href="/dynamicblogandtool/tools/cursive.html" class="tab-link">Cursive</a>
+      <a href="/dynamicblogandtool/tools/small.html" class="tab-link">Small</a>
+      <a href="/dynamicblogandtool/tools/bold.html" class="tab-link">Bold</a>
+      <a href="/dynamicblogandtool/tools/invisible.html" class="tab-link">Hidden</a>
+      <a href="/dynamicblogandtool/tools/glitch.html" class="tab-link">Glitch</a>
+      <a href="/dynamicblogandtool/tools/stylish-text-generator.html" class="tab-link">Stylish</a>
+      <a href="/dynamicblogandtool/tools/strikethrough.html" class="tab-link">Strikethrough</a>
+      <a href="/dynamicblogandtool/tools/upside-down.html" class="tab-link">Upside Down</a>
+      <a href="/dynamicblogandtool/tools/weird-text.html" class="tab-link">Weird</a>
+      <a href="/dynamicblogandtool/tools/underline-text.html" class="tab-link">Underline</a>
+      <a href="/dynamicblogandtool/tools/italic.html" class="tab-link">italic</a>
+      <a href="/dynamicblogandtool/tools/vaporwave-text.html" class="tab-link">Vaporwave</a>
+      <a href="/dynamicblogandtool/tools/japanese-text.html" class="tab-link">Japanese</a>
+      <a href="/dynamicblogandtool/tools/special.html" class="tab-link">Special</a>
+      <a href="/dynamicblogandtool/tools/demonic.html" class="tab-link">Demonic</a>
+      <a href="/dynamicblogandtool/tools/symbols.html" class="tab-link">Symbol text</a>
+    </nav>
+    <span class="scroll-btn right-btn" id="scrollRightBtn">&gt;</span>
+  </div>
+</div>
+</div>
+<style>
+
+  /* Symbol Container and Box Styles */
+  .symbol-container {
+      display: grid;
+      color: black;
+      grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+      gap: 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-bottom: 18px;
+  }
+
+  #fancy-text-symbols {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .symbol-box {
+      position: relative;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: transform 0.1s, background-color 0.2s, color 0.2s;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 6px;
+      text-align: center;
+  }
+  .symbol-box:hover { color: white; background-color: #007bff; transform: scale(1.05); box-shadow: 0 4px 8px rgba(0,0,0,0.12); }
+
+  .symbol-content {
+      transition: transform 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 5px;
+      max-width: 100%;
+      user-select: none;
+  }
+
+  .symbol-length {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      background-color: rgba(255,255,255,0.8);
+      border-top-left-radius: 8px;
+      color: #333;
+      z-index: 10;
+  }
+
+  /* Original popup (blue) - keep if you have a main copy system that uses this */
+  #copied-popup {
+      position: fixed;
+      top: 82%;
+      left: 50%;
+      transform: translate(-50%, 0) scale(0.95);
+      background-color: #007bff;
+      color: white;
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 1000;
+      transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+      opacity: 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  #copied-popup.show { transform: translate(-50%,0) scale(1); opacity: 1; }
+
+  /* Alternative popup (green) used by CopyAlt to avoid collisions */
+  #copied-popup-alt {
+      position: fixed;
+      top: 90%;
+      left: 50%;
+      transform: translate(-50%, 0) scale(0.95);
+      background-color: #28a745; /* green so it's visually distinct */
+      color: white;
+      padding: 12px 22px;
+      font-size: 16px;
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 1001;
+      transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+      opacity: 0;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  #copied-popup-alt.show { transform: translate(-50%,0) scale(1); opacity: 1; }
+
+  @media (max-width:480px){
+    .symbol-box { height:56px; font-size:20px }
+    #copied-popup, #copied-popup-alt { font-size:14px; padding:10px 16px }
+  }
+
+</style>
+
+
+<div class="output-list main-content">
+
+
+  <!-- Symbol Groups -->
+  <section>
+    <h2>Stars Symbols</h2>
+    <div class="symbol-container" id="stars-symbols">
+      ★ ☆ ✡ ✦ ✧ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ⁂ ⁎ ⁑ ✢ ✣ ✤ ✥ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ✺ ✻ ✼ ✽ ✾ ✿ ❀ ❁ ❂ ❃ ❇ ❈ ❉ ❊ ❋ ❄ ❆ ❅ ⋆ ≛ ᕯ ✲ ࿏ ꙰ ۞ ⭒ ⍟ ⭐ 🌠 🌟 💫 ✨ 🌃 🔯
+    </div>
+  </section>
+
+  <section>
+    <h2>Currency Symbols</h2>
+    <div class="symbol-container" id="currency-symbols">
+      ¢ $ € £ ¥ ₮ ৲ ৳ ௹ ฿ ៛ ₠ ₡ ₢ ₣ ₤ ₥ ₦ ₧ ₨ ₩ ₪ ₫ ₭ ₯ ₰ ₱ ₲ ₳ ₴ ₵ ￥ ﷼ ¤ ƒ
+    </div>
+  </section>
+
+  <section>
+    <h2>Bracket Symbols</h2>
+    <div class="symbol-container" id="bracket-symbols">
+      〈 〉 《 》 「 」 『 』 【 】 〔 〕 ︵ ︶ ︷ ︸ ︹ ︺ ︻ ︼ ︽ ︾ ︿ ﹀ ﹁ ﹂ ﹃ ﹄ ﹙ ﹚ ﹛ ﹜ ﹝ ﹞ ﹤ ﹥ （ ） ＜ ＞ ｛ ｝ 〖 〗 〘 〙 〚 〛 « » ‹ ›
+    </div>
+  </section>
+
+  <section>
+    <h2>Fancy Text Symbols (Long Sequences)</h2>
+    <div class="symbol-container" id="fancy-text-symbols">
+      ˗ˏˋ꒰ 🍒 ꒱ ˏˋ°•*⁀➷ ༊*·˚ ⋆·˚ ༘ * ・❥・ ೃ⁀➷ -‘๑’- ✧.* ੈ✩‧₊˚ ˚ ༘♡ ⋆｡˚ ☄. *. ⋆ ╰┈➤ ❜ ─ ─ ❛ *ೃ༄ *ੈ✩‧₊˚ ˚₊· ͟͟͞͞➳❥ ┊͙ ˘͈ᵕ˘͈ ⍣ ೋ ¡! ❞ ︶︶༉‧₊˚
+    </div>
+  </section>
+
+  <!-- Alternative popup notification (namespaced) -->
+  <div id="copied-popup-alt" role="status" aria-live="polite">Copied!</div>
+  <!-- Keep the original popup if your existing system uses it (optional) -->
+  <div id="copied-popup" role="status" aria-live="polite" style="display:none;">Copied!</div>
+
+</div>
+
+
+<!-- Namespaced copy system: CopyAlt -->
+<script>
+/*
+  CopyAlt - a namespaced copy/notification system that won't collide with other scripts.
+  Usage: Click any generated .symbol-box to copy its symbol. Notification shows at #copied-popup-alt.
+*/
+(function () {
+    const ns = window.CopyAlt = window.CopyAlt || {};
+
+    // Popup element specific to this system
+    ns.popup = document.getElementById('copied-popup-alt');
+
+    // Copy text function with async Clipboard API + fallback
+    ns.copyToClipboard = async function(text) {
+        if (text === undefined || text === null) return false;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (err) {
+                console.warn('CopyAlt: async clipboard failed, falling back:', err);
+            }
+        }
+
+        // Fallback: off-screen textarea + execCommand
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '0';
+        textarea.style.opacity = '0';
+        textarea.setAttribute('aria-hidden', 'true');
+
+        document.body.appendChild(textarea);
+
+        try {
+            textarea.focus();
+            textarea.select();
+            try { textarea.setSelectionRange(0, textarea.value.length); } catch (e) { /* ignore */ }
+
+            const successful = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            return successful;
+        } catch (err) {
+            console.error('CopyAlt: fallback copy failed:', err);
+            document.body.removeChild(textarea);
+            return false;
+        }
+    };
+
+    // Popup display logic
+    ns._popupTimeout = null;
+    ns.showCopiedPopup = function(message) {
+        if (!ns.popup) return;
+        const prev = ns.popup.textContent;
+        if (message) ns.popup.textContent = message;
+
+        ns.popup.classList.add('show');
+
+        if (ns._popupTimeout) clearTimeout(ns._popupTimeout);
+        ns._popupTimeout = setTimeout(() => {
+            ns.popup.classList.remove('show');
+            ns._popupTimeout = null;
+            ns.popup.textContent = prev;
+        }, 900);
+    };
+
+    // Initialize: build boxes from container text and attach event delegation
+    ns.init = function() {
+        const containers = document.querySelectorAll('.symbol-container');
+
+        containers.forEach(container => {
+            // If existing .symbol-box elements are present and already attributed to another system,
+            // we won't rebuild to avoid duplicate UI. If you want CopyAlt to always rebuild, remove this check.
+            if (container.querySelector('.symbol-box[data-copy-alt-built="true"]')) return;
+
+            // If container already contains many symbols as text, parse them
+            const raw = container.textContent || '';
+            const symbols = raw.trim().split(/\s+/).filter(s => s.length > 0);
+
+            // Build boxes with a marker attribute so we can identify which were built by CopyAlt
+            container.innerHTML = symbols.map(symbol => {
+                const charCountEstimate = Array.from(symbol).length;
+                // Use data-copy-alt attribute to mark CopyAlt generated boxes
+                return `
+                    <div class="symbol-box" tabindex="0" title="Click to copy: ${escapeHtml(symbol)}" data-copy-alt-built="true">
+                        <span class="symbol-content" aria-hidden="true">${escapeHtml(symbol)}</span>
+                        <span class="symbol-length">${charCountEstimate} Chars</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Event delegation on the container
+            container.addEventListener('click', async (e) => {
+                const box = e.target.closest('.symbol-box[data-copy-alt-built="true"]');
+                if (!box) return;
+                const symbolEl = box.querySelector('.symbol-content');
+                if (!symbolEl) return;
+                const symbol = symbolEl.textContent.trim();
+                const ok = await ns.copyToClipboard(symbol);
+                if (ok) ns.showCopiedPopup('Copied (Alt): ' + (symbol || '•'));
+                else {
+                    console.error('CopyAlt: failed to copy:', symbol);
+                    ns.showCopiedPopup('Copy failed (Alt)');
+                }
+            });
+
+            // Keyboard support: Enter or Space copies
+            container.addEventListener('keydown', async (e) => {
+                const box = e.target.closest('.symbol-box[data-copy-alt-built="true"]') || (e.target.classList && e.target.classList.contains('symbol-box') ? e.target : null);
+                if (!box) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const symbolEl = box.querySelector('.symbol-content');
+                    if (!symbolEl) return;
+                    const symbol = symbolEl.textContent.trim();
+                    const ok = await ns.copyToClipboard(symbol);
+                    if (ok) ns.showCopiedPopup('Copied (Alt): ' + (symbol || '•'));
+                }
+            });
+        });
+    };
+
+    // Utility to escape HTML when injecting symbol text (prevents accidental markup injection)
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Auto-run init (script is placed before closing body so DOM exists)
+    ns.init();
+
+    // Public API: CopyAlt.copyText('text') -> Promise<boolean>
+    ns.copyText = async function(text) {
+        const ok = await ns.copyToClipboard(text);
+        if (ok) ns.showCopiedPopup('Copied (Alt): ' + (text || '•'));
+        return ok;
+    };
+
+})();
+</script>
+
+
+
+
+  <article>
+    
+    </article>
