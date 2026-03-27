@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}Blog | {{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+  <link rel="canonical" href="{{ page.url | prepend: site.url }}" />
+  {% seo %}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+</head>
+<body>
+  {% include navbar.html %}
+
+  <main class="page-wrap" id="main-content">
+    <div class="blog-index-hero">
+      <p class="section-eyebrow">✦ FontCraft Blog</p>
+      <h1>Tips, Guides &amp; Font Tricks</h1>
+      <p>Learn how to use fancy Unicode fonts on every platform.</p>
+    </div>
+
+    <div class="content-with-sidebar">
+      <div class="main-content">
+
+        <!-- Tag filter if filtered -->
+        {% if page.tag %}
+        <div class="tag-filter-notice">
+          Showing posts tagged: <strong>{{ page.tag }}</strong>
+          <a href="{{ '/blog/' | relative_url }}">Clear filter ×</a>
+        </div>
+        {% endif %}
+
+        <div class="blog-list">
+          {% assign posts = paginator.posts | default: site.posts %}
+          {% for post in posts %}
+          <article class="blog-list-item" itemscope itemtype="https://schema.org/BlogPosting">
+            <div class="blog-list-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                {{ post.date | date: "%B %d, %Y" }}
+              </time>
+              {% for tag in post.tags limit:3 %}
+              <span class="tag-pill small">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <h2 itemprop="headline">
+              <a href="{{ post.url | relative_url }}" itemprop="url">{{ post.title }}</a>
+            </h2>
+            <p itemprop="description">
+              {{ post.description | default: post.excerpt | strip_html | truncatewords: 30 }}
+            </p>
+            <a href="{{ post.url | relative_url }}" class="read-more">Read article →</a>
+          </article>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if paginator.total_pages > 1 %}
+        <nav class="pagination" aria-label="Blog pagination">
+          {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path | relative_url }}" class="page-btn">← Newer</a>
+          {% endif %}
+          <span class="page-info">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+          {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | relative_url }}" class="page-btn">Older →</a>
+          {% endif %}
+        </nav>
+        {% endif %}
+
+      </div>
+
+      {% include sidebar.html %}
+    </div>
+  </main>
+
+  {% include footer.html %}
+  <script src="{{ '/assets/js/nav.js' | relative_url }}"></script>
+</body>
+</html>

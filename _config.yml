@@ -1,8 +1,30 @@
 title: "FontCraft"
-description: "Generate fancy fonts & copy them instantly — free Unicode font generator"
+description: "Free font generator, text tools & tips for designers and creators."
 url: "https://yourusername.github.io"
 baseurl: ""
 lang: en
-author: "FontCraft"
+author: "FontCraft Team"
+
+# Blog settings
+show_excerpts: true
+paginate: 6
+paginate_path: "/blog/page/:num/"
+
+# Plugins (all supported by GitHub Pages)
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Defaults — every post auto-gets layout & author
+defaults:
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      author: "FontCraft Team"
+      show_sidebar: true
+
 markdown: kramdown
-permalink: pretty
+permalink: /blog/:year/:month/:slug/

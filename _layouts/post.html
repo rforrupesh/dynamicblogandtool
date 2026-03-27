@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | truncatewords: 30 }}" />
+  <link rel="canonical" href="{{ page.url | prepend: site.url }}" />
+  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html }}" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+  {% seo %}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ page.title | jsonify }},
+    "description": {{ page.description | default: page.excerpt | strip_html | jsonify }},
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "author": { "@type": "Person", "name": {{ page.author | default: site.author | jsonify }} },
+    "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }} },
+    "url": "{{ page.url | prepend: site.url }}"
+  }
+  </script>
+</head>
+<body>
+  {% include navbar.html %}
+
+  <main class="page-wrap" id="main-content">
+    <div class="content-with-sidebar">
+
+      <article class="post-article" itemscope itemtype="https://schema.org/BlogPosting">
+
+        <!-- Post Header -->
+        <header class="post-header">
+          <div class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+              {{ page.date | date: "%B %d, %Y" }}
+            </time>
+            <span class="meta-sep">·</span>
+            <span itemprop="author">{{ page.author | default: site.author }}</span>
+            {% for tag in page.tags %}
+            <a href="{{ '/blog/tag/' | append: tag | relative_url }}" class="tag-pill small">{{ tag }}</a>
+            {% endfor %}
+          </div>
+          <h1 itemprop="headline">{{ page.title }}</h1>
+          {% if page.description %}
+          <p class="post-desc" itemprop="description">{{ page.description }}</p>
+          {% endif %}
+        </header>
+
+        <!-- Post Content -->
+        <div class="post-content" itemprop="articleBody">
+          {{ content }}
+        </div>
+
+        <!-- Post Footer -->
+        <footer class="post-footer">
+          <div class="post-tags">
+            <strong>Tags:</strong>
+            {% for tag in page.tags %}
+            <a href="{{ '/blog/tag/' | append: tag | relative_url }}" class="tag-pill">{{ tag }}</a>
+            {% endfor %}
+          </div>
+
+          <!-- Prev / Next -->
+          <nav class="post-nav" aria-label="Post navigation">
+            {% if page.previous.url %}
+            <a href="{{ page.previous.url | relative_url }}" class="post-nav-btn">
+              <span class="nav-dir">← Previous</span>
+              <span>{{ page.previous.title | truncatewords: 6 }}</span>
+            </a>
+            {% endif %}
+            {% if page.next.url %}
+            <a href="{{ page.next.url | relative_url }}" class="post-nav-btn">
+              <span class="nav-dir">Next →</span>
+              <span>{{ page.next.title | truncatewords: 6 }}</span>
+            </a>
+            {% endif %}
+          </nav>
+        </footer>
+
+      </article>
+
+      {% include sidebar.html %}
+    </div>
+  </main>
+
+  {% include footer.html %}
+  <script src="{{ '/assets/js/nav.js' | relative_url }}"></script>
+</body>
+</html>

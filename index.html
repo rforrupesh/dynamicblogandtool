@@ -1,91 +1,49 @@
 ---
 layout: default
-title: "Free Font Generator — Fancy & Stylish Fonts"
-description: "Generate 50+ fancy Unicode font styles instantly. Bold, cursive, fraktur, glitch, upside-down & more. Click to copy. Works on Instagram, TikTok, Twitter & all platforms."
+title: "Free Fancy Font Generator — Copy & Paste"
+description: "Generate 50+ fancy Unicode font styles instantly. Bold, cursive, fraktur, glitch & more. Works on Instagram, TikTok, Discord, Twitter."
 fontgen: true
 ---
 
-<!-- Hero -->
+<!-- Hero + Generator -->
 <section class="hero">
   <div class="hero-glow"></div>
-
-  <div class="hero-tag"> 222222100% Free · No signup needed</div>
-
+  <span class="hero-tag">✦ 100% Free · No signup</span>
   <h1>Generate <span>Fancy Fonts</span><br>Copy &amp; Paste Anywhere</h1>
-  <p>50+ Unicode font styles for Instagram, TikTok, Twitter, Discord, YouTube &amp; more.</p>
+  <p>50+ Unicode font styles for Instagram, TikTok, Discord, Twitter &amp; more.</p>
 
-  <!-- Generator -->
   <div class="generator-box" id="generator">
     <div class="input-wrapper">
-      <input
-        type="text"
-        id="fontInput"
-        placeholder="Type your text here..."
-        maxlength="200"
-        autocomplete="off"
-        spellcheck="false"
-        aria-label="Enter text to convert into fancy fonts"
-      />
-      <button class="input-clear" id="clearBtn" aria-label="Clear text">×</button>
+      <input type="text" id="fontInput" placeholder="Type your text here..."
+             maxlength="200" autocomplete="off" spellcheck="false"
+             aria-label="Enter text to convert" />
+      <button class="input-clear" id="clearBtn" aria-label="Clear">×</button>
     </div>
-
-    <!-- Filter Tabs -->
-    <div class="filter-tabs" role="tablist" aria-label="Font categories">
-      <button class="filter-tab active" data-cat="all" role="tab">All Fonts</button>
-      <button class="filter-tab" data-cat="popular" role="tab">⭐ Popular</button>
-      <button class="filter-tab" data-cat="sans" role="tab">Sans / Mono</button>
-      <button class="filter-tab" data-cat="effects" role="tab">✨ Effects</button>
-      <button class="filter-tab" data-cat="glitch" role="tab">⚡ Glitch</button>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-cat="all">All Fonts</button>
+      <button class="filter-tab" data-cat="popular">⭐ Popular</button>
+      <button class="filter-tab" data-cat="sans">Sans / Mono</button>
+      <button class="filter-tab" data-cat="effects">✨ Effects</button>
+      <button class="filter-tab" data-cat="glitch">⚡ Glitch</button>
     </div>
   </div>
 </section>
 
-<!-- Results -->
-<section class="results-section" aria-live="polite" aria-label="Font previews">
-  <div class="fonts-grid" id="fontsGrid">
-    <!-- Filled by JS -->
-  </div>
+<!-- Font Results -->
+<section class="results-section" aria-live="polite">
+  <div class="fonts-grid" id="fontsGrid"></div>
 </section>
 
-<!-- How It Works -->
+<!-- How it Works -->
 <section class="how-section">
   <h2>How It Works</h2>
-  <p>Three simple steps to get your fancy text</p>
+  <p>Three steps to fancy text</p>
   <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <h3>Type Your Text</h3>
-      <p>Enter any word or sentence into the input box above.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <h3>Choose a Style</h3>
-      <p>Browse 50+ font styles and find the one you love.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <h3>Copy &amp; Paste</h3>
-      <p>Click the Copy button and paste anywhere — it just works.</p>
-    </div>
+    <div class="step-card"><div class="step-num">1</div><h3>Type</h3><p>Enter any word or sentence above.</p></div>
+    <div class="step-card"><div class="step-num">2</div><h3>Pick a Style</h3><p>Browse 50+ font styles.</p></div>
+    <div class="step-card"><div class="step-num">3</div><h3>Copy & Paste</h3><p>Click Copy — works everywhere.</p></div>
   </div>
 </section>
 
-<!-- SEO Content -->
-<section class="content-section">
-  <h2>What is a Font Generator?</h2>
-  <p>
-    A font generator converts regular text into Unicode symbols that look like different font styles.
-    Because they use standard Unicode characters, the styled text works everywhere — no special fonts or apps needed.
-  </p>
-
-  <h2>Where Can I Use Fancy Fonts?</h2>
-  <p>
-    Fancy fonts work on Instagram bios, TikTok usernames, Twitter/X posts, Discord messages,
-    YouTube channel names, Facebook posts, WhatsApp, and game names like Free Fire, PUBG, and Roblox.
-  </p>
-
-  <h2>Is FontCraft Free?</h2>
-  <p>
-    Yes, completely free. No signup, no watermarks, no limits. Generate and copy as many styles as you need.
-  </p>
-</section>
+<!-- Recent Blog Posts on Homepage -->
+{% include recent-posts.html %}

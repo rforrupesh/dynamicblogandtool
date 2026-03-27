@@ -1,68 +1,38 @@
 <header class="navbar" id="navbar">
   <div class="nav-inner">
-
-    <a href="{{ '/' | relative_url }}" class="nav-logo" aria-label="{{ site.title }} home">
+    <a href="{{ '/' | relative_url }}" class="nav-logo">
       <span class="logo-icon">✦</span>
-      <span class="logo-text">Font<strong>Craft</strong></span>
+      Font<strong>Craft</strong>
     </a>
 
-    <!-- Desktop Nav -->
     <nav class="nav-links" aria-label="Main navigation">
+      <a class="nav-item {% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">Home</a>
 
-      <a href="{{ '/' | relative_url }}" class="nav-item {% if page.url == '/' %}active{% endif %}">Home</a>
-
-      <!-- Dropdown -->
       <div class="nav-dropdown">
-        <button class="nav-item dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-          Font Styles <span class="chevron">▾</span>
-        </button>
-        <div class="dropdown-menu" role="menu">
-          <div class="dropdown-grid">
-            <div class="dropdown-col">
-              <p class="dropdown-label">Popular</p>
-              <a href="{{ '/fonts/bold/' | relative_url }}" role="menuitem">𝐁𝐨𝐥𝐝</a>
-              <a href="{{ '/fonts/italic/' | relative_url }}" role="menuitem">𝐼𝑡𝑎𝑙𝑖𝑐</a>
-              <a href="{{ '/fonts/cursive/' | relative_url }}" role="menuitem">𝒞𝓊𝓇𝓈𝒾𝓋ℯ</a>
-              <a href="{{ '/fonts/fraktur/' | relative_url }}" role="menuitem">𝔉𝔯𝔞𝔨𝔱𝔲𝔯</a>
-            </div>
-            <div class="dropdown-col">
-              <p class="dropdown-label">Effects</p>
-              <a href="{{ '/fonts/glitch/' | relative_url }}" role="menuitem">G̷l̷i̷t̷c̷h̷</a>
-              <a href="{{ '/fonts/strikethrough/' | relative_url }}" role="menuitem">S̶t̶r̶i̶k̶e̶</a>
-              <a href="{{ '/fonts/bubble/' | relative_url }}" role="menuitem">Ⓑⓤⓑⓑⓛⓔ</a>
-              <a href="{{ '/fonts/wide/' | relative_url }}" role="menuitem">Ｗｉｄｅ</a>
-            </div>
-            <div class="dropdown-col">
-              <p class="dropdown-label">More</p>
-              <a href="{{ '/fonts/smallcaps/' | relative_url }}" role="menuitem">Sᴍᴀʟʟ Cᴀᴘs</a>
-              <a href="{{ '/fonts/double-struck/' | relative_url }}" role="menuitem">𝔻𝕠𝕦𝕓𝕝𝕖</a>
-              <a href="{{ '/fonts/upside-down/' | relative_url }}" role="menuitem">uʍop ǝpᴉsd∩</a>
-              <a href="{{ '/fonts/' | relative_url }}" role="menuitem" class="see-all">See all →</a>
-            </div>
-          </div>
+        <button class="nav-item dropdown-toggle" aria-expanded="false">Tools <span class="chevron">▾</span></button>
+        <div class="dropdown-menu">
+          <a href="{{ '/' | relative_url }}">✦ Font Generator</a>
+          <a href="{{ '/tools/bold/' | relative_url }}">𝐁 Bold Text</a>
+          <a href="{{ '/tools/cursive/' | relative_url }}">𝒞 Cursive Text</a>
+          <a href="{{ '/tools/glitch/' | relative_url }}">⚡ Glitch Text</a>
+          <a href="{{ '/tools/' | relative_url }}" class="see-all">All Tools →</a>
         </div>
       </div>
 
-      <a href="{{ '/tools/' | relative_url }}" class="nav-item {% if page.url contains '/tools' %}active{% endif %}">Tools</a>
-      <a href="{{ '/blog/' | relative_url }}" class="nav-item {% if page.url contains '/blog' %}active{% endif %}">Blog</a>
-      <a href="{{ '/about/' | relative_url }}" class="nav-item {% if page.url contains '/about' %}active{% endif %}">About</a>
+      <a class="nav-item {% if page.url contains '/blog' %}active{% endif %}" href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a class="nav-item {% if page.url contains '/about' %}active{% endif %}" href="{{ '/about/' | relative_url }}">About</a>
     </nav>
 
-    <!-- CTA -->
-    <a href="#generator" class="nav-cta">Generate Free ✦</a>
+    <a href="{{ '/' | relative_url }}#generator" class="nav-cta">Try Generator ✦</a>
 
-    <!-- Hamburger -->
     <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-
   </div>
 
-  <!-- Mobile drawer -->
   <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-    <nav aria-label="Mobile navigation">
+    <nav>
       <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/fonts/' | relative_url }}">Font Styles</a>
       <a href="{{ '/tools/' | relative_url }}">Tools</a>
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
