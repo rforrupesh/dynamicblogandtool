@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ page.title }}</title>
+</head>
+
+<body>
+
+{% include navbar.html %}
+
+<div style="display:flex; gap:40px; max-width:1000px; margin:auto;">
+
+  <!-- MAIN ARTICLE -->
+  <article style="flex:3;">
+    <h1>{{ page.title }}</h1>
+
+    {{ content }}
+
+    <hr>
+
+    <!-- NEXT / PREVIOUS -->
+    <div style="display:flex; justify-content:space-between;">
+      
+      {% if page.previous %}
+        <a href="{{ site.baseurl }}{{ page.previous.url }}">← {{ page.previous.title }}</a>
+      {% endif %}
+
+      {% if page.next %}
+        <a href="{{ site.baseurl }}{{ page.next.url }}">{{ page.next.title }} →</a>
+      {% endif %}
+
+    </div>
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside style="flex:1;">
+    <h3>Recent Posts</h3>
+    <ul>
+      {% for post in site.posts limit:5 %}
+        <li>
+          <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+</div>
+
+{% include footer.html %}
+
+</body>
+</html>
